@@ -32,7 +32,17 @@ build:
 
 test:
   stage: test
-  script: gradle check
+  script: 
+    - gradle test jacocoTestReport
+  artifacts:
+    when: always
+    reports:
+      junit: 
+        - domain/build/test-results/test/**/TEST-*.xml
+        - api/build/test-results/test/**/TEST-*.xml
+    paths:
+      - domain/build/jacoco/jacocoTestReport.xml
+      - domain/build/gl-code-quality-report.json
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
