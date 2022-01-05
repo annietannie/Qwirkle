@@ -3,15 +3,13 @@
 Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. Per ronde mag een speler één serie aanleggen, bestaande uit 1 of meer tegels met een gelijk symbool of in gelijke kleur. Een Qwirkle (een rij die uit 6 tegels bestaat) is 6 bonuspunten waard.
 
 ## Eisen
-<ul>
- <li>Alle spelers hebben 6 steentjes</li>
- <li>Spelers kunnen alleen hun eigen hand aan steentjes zien</li>
- <li>Spelers kunnen steentjes aanleggen</li>
- <li>Na een beurt wordt de hand automatisch aangevuld tot 6</li>
- <li>Het spel moet een (zichtbaar) grid hebben</li>
- <li>Er zijn in totaal 108 steentjes (alle steentjes komen 3x voor) en als die op zijn wordt er niet meer aangevuld</li>
- <li>Spelers kunnen zich aanmelden bij een potje</li>
-</ul>
+* Alle spelers hebben 6 steentjes
+* Spelers kunnen alleen hun eigen hand aan steentjes zien
+* Spelers kunnen steentjes aanleggen
+* Na een beurt wordt de hand automatisch aangevuld tot 6
+* Het spel moet een (zichtbaar) grid hebben
+* Er zijn in totaal 108 steentjes (alle steentjes komen 3x voor) en als die op zijn wordt er niet meer aangevuld
+* Spelers kunnen zich aanmelden bij een potje
 
 ## Features
 * Automatische puntentelling
@@ -29,20 +27,17 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
 
 ## Minimum viable product
 Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
-Tech Stack
-<ul>
- <li>Backend: Java</li>
- <li>API: Java (met JSON)</li>
- <li>(Database: MySQL)</li>
- <li>Frontend: JavaScript</li>
-</ul>
+
+## Tech Stack
+* Backend: Java
+* API: Java (met JSON)
+* (Database: MySQL)
+* Frontend: JavaScript
 
 ## Technisch leerdoel
-<ul>
- <li>Met JavaScript/React werken</li>
- <li>Beter leren begrijpen hoe de verschillende lagen met elkaar samenwerken</li>
- <li>Gestructureerdere code schrijven</li>
-</ul>
+* Met JavaScript/React werken
+* Beter leren begrijpen hoe de verschillende lagen met elkaar samenwerken
+* Gestructureerdere code schrijven
 
 ## Persoonlijk leerdoel
 Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
