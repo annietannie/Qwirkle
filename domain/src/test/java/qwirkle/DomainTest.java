@@ -5,10 +5,6 @@ package qwirkle;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import jakarta.servlet.http.*;
-import jakarta.ws.rs.core.*;
 
 public class DomainTest {
     @Test public void appHasAGreeting() {
