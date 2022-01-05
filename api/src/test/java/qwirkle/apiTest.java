@@ -3,8 +3,13 @@
  */
 package qwirkle;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import jakarta.servlet.http.*;
+import jakarta.ws.rs.core.*;
+
 
 public class apiTest {
     @Test public void appHasAGreeting() {
