@@ -1,8 +1,8 @@
-<h1>Qwirkle</h1>
+# Qwirkle
 
 Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. Per ronde mag een speler één serie aanleggen, bestaande uit 1 of meer tegels met een gelijk symbool of in gelijke kleur. Een Qwirkle (een rij die uit 6 tegels bestaat) is 6 bonuspunten waard.
 
-<h2>Eisen</h2>
+## Eisen
 <ul>
  <li>Alle spelers hebben 6 steentjes</li>
  <li>Spelers kunnen alleen hun eigen hand aan steentjes zien</li>
@@ -13,26 +13,21 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
  <li>Spelers kunnen zich aanmelden bij een potje</li>
 </ul>
 
-<h2>Features</h2>
-<ul>
- <li>Automatische puntentelling</li>
- <li>Spel geeft aan wanneer een zet ongeldig is omdat:</li>
- <ul>
-  <li>Het is geen serie</li>
-  <li>De serie is in zichzelf niet correct</li>
-  <li>De serie is niet correct met waar het op aangesloten wordt</li>
-  <li>Incorrect als:</li>
-  <ul>
-   <li>Er komt een dubbele steen in een serie voor</li>
-   <li>Er is verschil in zowel de kleuren als de vormen</li>
-  </ul>
- </ul>
-<li>Tot 4 personen</li>
- <li>Visuele en geluidseffecten als een speler een Qwirkle heeft gelegd</li>
- <li>Tab met spelregels</li>
-</ul>
+## Features
+* Automatische puntentelling
+* Spel geeft aan wanneer een zet ongeldig is omdat:
+  * Het is geen serie
+  * De serie is in zichzelf niet correct
+  * De serie is niet correct met waar het op aangesloten wordt
+  * Incorrect als:
+    * Er komt een dubbele steen in een serie voor
+    * Er is verschil in zowel de kleuren als de vormen
+* Tot 4 personen
+* Visuele en geluidseffecten als een speler een Qwirkle heeft gelegd
+* Tab met spelregels
 
-<h2>Minimum viable product</h2>
+
+## Minimum viable product
 Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
 Tech Stack
 <ul>
@@ -42,12 +37,12 @@ Tech Stack
  <li>Frontend: JavaScript</li>
 </ul>
 
-<h2>Technisch leerdoel</h2>
+## Technisch leerdoel
 <ul>
  <li>Met JavaScript/React werken</li>
  <li>Beter leren begrijpen hoe de verschillende lagen met elkaar samenwerken</li>
  <li>Gestructureerdere code schrijven</li>
 </ul>
 
-<h2>Persoonlijk leerdoel</h2>
+## Persoonlijk leerdoel
 Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
