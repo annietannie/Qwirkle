@@ -18,13 +18,13 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
  <li>Automatische puntentelling</li>
  <li>Spel geeft aan wanneer een zet ongeldig is omdat:</li>
  <ul>
-  <li>  Het is geen serie</li>
-  <li>  De serie is in zichzelf niet correct</li>
-  <li>  De serie is niet correct met waar het op aangesloten wordt</li>
-  <li>  Incorrect als:</li>
+  <li>Het is geen serie</li>
+  <li>De serie is in zichzelf niet correct</li>
+  <li>De serie is niet correct met waar het op aangesloten wordt</li>
+  <li>Incorrect als:</li>
   <ul>
-   <li>    Er komt een dubbele steen in een serie voor</li>
-   <li>    Er is verschil in zowel de kleuren als de vormen</li>
+   <li>Er komt een dubbele steen in een serie voor</li>
+   <li>Er is verschil in zowel de kleuren als de vormen</li>
   </ul>
  </ul>
 <li>Tot 4 personen</li>
@@ -35,15 +35,19 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
 <h2>Minimum viable product</h2>
 Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
 Tech Stack
--	Backend: Java
--	API: Java (met JSON)
--	(Database: MySQL)
--	Frontend: JavaScript
+<ul>
+ <li>Backend: Java</li>
+ <li>API: Java (met JSON)</li>
+ <li>(Database: MySQL)</li>
+ <li>Frontend: JavaScript</li>
+</ul>
 
 <h2>Technisch leerdoel</h2>
--	Met JavaScript/React werken
--	Beter leren begrijpen hoe de verschillende lagen met elkaar samenwerken
--	Gestructureerdere code schrijven 
+<ul>
+ <li>Met JavaScript/React werken</li>
+ <li>Beter leren begrijpen hoe de verschillende lagen met elkaar samenwerken</li>
+ <li>Gestructureerdere code schrijven</li>
+</ul>
 
 <h2>Persoonlijk leerdoel</h2>
 Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
