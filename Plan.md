@@ -18,14 +18,14 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
  <li>Automatische puntentelling</li>
  <li>Spel geeft aan wanneer een zet ongeldig is omdat:</li>
  <ul>
-  <li>Het is geen serie</li>
-  <li>De serie is in zichzelf niet correct</li>
-  <li>De serie is niet correct met waar het op aangesloten wordt</li>
-  <li>Incorrect als:</li>
-  <ul>
-   <li>Er komt een dubbele steen in een serie voor</li>
-   <li>Er is verschil in zowel de kleuren als de vormen</li>
-  </ul>
+     <li>Het is geen serie</li>
+      <li>De serie is in zichzelf niet correct</li>
+      <li>De serie is niet correct met waar het op aangesloten wordt</li>
+      <li>Incorrect als:</li>
+      <ul>
+           <li>Er komt een dubbele steen in een serie voor</li>
+           <li>Er is verschil in zowel de kleuren als de vormen</li>
+      </ul>
  </ul>
 <li>Tot 4 personen</li>
  <li>Visuele en geluidseffecten als een speler een Qwirkle heeft gelegd</li>
