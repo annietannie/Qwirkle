@@ -10,6 +10,7 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
 * Het spel moet een (zichtbaar) grid hebben
 * Er zijn in totaal 108 steentjes (alle steentjes komen 3x voor) en als die op zijn wordt er niet meer aangevuld
 * Spelers kunnen zich aanmelden bij een potje
+* Spelers kunnen een willekeurig aantal steentjes ruilen met de pot in plaats van het neerleggen van steentjes
 
 ## Features
 * Automatische puntentelling
@@ -40,4 +41,5 @@ Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
 * Gestructureerdere code schrijven
 
 ## Persoonlijk leerdoel
-Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
+* Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
+* Op een gestructureerde, agile manier werken
