@@ -48,5 +48,7 @@ public class StartGameTest {
         Tile tileNeighbour = player4.getNeighbour().getTile(0);
         assertEquals(tileP1.getColour(), tileNeighbour.getColour());
         assertEquals(tileP1.getShape(), tileNeighbour.getShape());
+        assertEquals(Colour.YELLOW, tileNeighbour.getColour());
+        assertEquals(Shape.DIAMOND, tileNeighbour.getShape());
     }
 }
