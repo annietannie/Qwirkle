@@ -41,4 +41,5 @@ Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
 * Gestructureerdere code schrijven
 
 ## Persoonlijk leerdoel
-Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
+* Niet in paniek raken als ik iets niet snap, maar de tijd nemen om het uit te zoeken en/of vragen stellen aan een van de begeleiders of mede trainees en daar ook niet bang voor zijn.
+* Op een gestructureerde, agile manier werken
