@@ -35,9 +35,10 @@ public class StartGameTest {
     public void Making_1_player_results_in_bag_with_102_tiles_and_player_has_6_tiles() {
         int numbTilesInBag = player1.getTileBag().getNumberOfTiles();
         List<Tile> tiles = player1.getTiles();
-        /*for (Tile tile : tiles) {
+        System.out.println("Tile player 1");
+        for (Tile tile : tiles) {
             System.out.println(tile.getColour() + " " + tile.getShape());
-        }*/
+        }
         assertEquals(84, numbTilesInBag);
         assertEquals(6, tiles.size());
     }
