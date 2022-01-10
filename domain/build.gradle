@@ -1,5 +1,5 @@
 plugins {
-    // Tell Gradle that we are building java as a library (non-executable piece of code intended for use by other applications).
+    // Tell Gradle that we are builing java as a library (non-executable piece of code intended for use by other applications).
     id 'java'
     id 'java-library'
     id 'jacoco'
@@ -19,7 +19,7 @@ dependencies {
 
 test {
     testLogging {
-        events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+		events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
     }
     // For running our tests, use the test runner provided by JUnit.
     useJUnitPlatform()
