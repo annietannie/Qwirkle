@@ -24,6 +24,7 @@ Qwirkle is een soort Scrabble, maar dan met 6 verschillende vormen en kleuren. P
 ## Features
 * Tot 4 personen op verschillende computers
 * Visuele en geluidseffecten als een speler een Qwirkle heeft gelegd
+* Topscores van alle spelers ooit
 
 ## Minimum viable product
 Een website waar je willekeurig Qwirkle steentjes in een grid kan neerleggen
