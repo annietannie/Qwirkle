@@ -67,7 +67,7 @@ export function StartGame({ setGameState }: StartGameProps) {
             <p className="errorMessage">{errorMessage}</p>
 
             <button className="startGameButton" type="submit">
-                Play Mancala!
+                Play Qwirkle!
             </button>
         </form>
     )

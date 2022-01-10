@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from "./Header/Header";
-import { About } from "./About/About";
+import { HowToPlay } from "./HowToPlay/HowToPlay";
 import { Mancala } from "./Mancala/Mancala";
 import "./App.css";
 
@@ -14,8 +14,8 @@ export function App() {
             <div className="main-content">
                 <Switch>
                     {/* If the user goes to the url /about, show the about page */}
-                    <Route path="/about">
-                        <About />
+                    <Route path="/howToPlay">
+                        <HowToPlay />
                     </Route>
 
                     {/* If the user goes to any other url, show the play page */}

@@ -9,7 +9,7 @@ input {
 .startGameButton {
     font-size: x-large;
     color: white;
-    background-color: green;
+    background-color: rgb(0,165,247);
     border: 1px solid black;
     border-radius: 20px;
     padding-left: 10px;
@@ -21,7 +21,7 @@ input {
 }
 
 .startGameButton:hover {
-    background-color: darkgreen;
+    background-color: rgb(0, 105, 158);
 }
 
 .startGameButton:active {
