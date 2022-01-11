@@ -6,6 +6,7 @@ header {
     color: rgb(224,0,24);
     font-size: 2rem;
     margin-bottom: 8px;
+    position: sticky;
 }
 
 .main-title{ 

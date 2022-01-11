@@ -1,6 +1,6 @@
 import React from "react";
 import type { GameState } from "../gameState";
-import "./Play.css";
+import "./Play Mancala.css";
 
 type PlayProps = {
     gameState: GameState;
@@ -48,9 +48,9 @@ export function Play({ gameState, setGameState }: PlayProps) {
 
     return (
         <div>
-            <h2 className="title">{gameState.players[0].name} vs {gameState.players[1].name}
-            </h2>
+            
             <div className="gameboard">
+            <h1 className="title">{gameState.players[0].name} vs {gameState.players[1].name}</h1>
                 <p> {(gameState.players[1].hasTurn) ? `>>> ${gameState.players[1].name} <<<` : gameState.players[1].name}</p>
 
                 {/* Bowls Player 2 */}
