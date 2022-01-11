@@ -90,6 +90,7 @@ public class Player {
                 changeThisTile.add(tiles.get(index));
                 changeThisTile.add(index);
                 changingTiles.add(changeThisTile);
+                setTile(null, index);
             }
         }
     }
@@ -108,6 +109,11 @@ public class Player {
 
     public void cancelChanging() {
         if (myTurn) {
+            for (List<Object> tileRow : changingTiles) {
+                Tile tile = (Tile) tileRow.get(0);
+                int index = (int) tileRow.get(1);
+                setTile(tile, index);
+            }
             changingTiles.clear();
             if (board.doesMoveExist()) {
                 cancelMove();

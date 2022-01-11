@@ -188,6 +188,12 @@ public class PlayGameTest {
     }
 
     @Test
+    public void Player1_changes_tile_1_and_before_confirmation_tile1_is_null() {
+        player1.changeTile(0);
+        assertEquals(null, player1.getTile(0));
+    }
+
+    @Test
     public void Player1_changes_tiles_1_and_3_and_gets_new_stones() {
         player1.changeTile(0);
         player1.changeTile(2);
