@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StartGame } from "./StartGame";
-import { Play } from "./Play Mancala";
+import { Play } from "./Play Qwirkle";
 import type { GameState } from "../gameState";
 
 /**
