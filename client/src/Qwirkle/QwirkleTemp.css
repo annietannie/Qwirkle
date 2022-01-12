@@ -1,0 +1,35 @@
+.QwirkleBoard {
+    text-align: center;
+}
+
+.gridSquare {
+    background-color: lightskyblue;
+    border: 0px;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin: 1px;
+}
+
+.handSquare {
+    background-color: black;
+    border: 0px;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin: 1px;
+}
+
+.button img {
+    height: 50px;
+    width: 50px;
+    margin: 1px; 
+}
+
+.tiles {
+    display: flex;
+}
+
+.hand-buttons {
+    display: flex;
+}

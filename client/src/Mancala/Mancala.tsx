@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { StartGame } from "./StartGame";
 import { Play } from "./Play";
 import type { GameState } from "../gameState";
-import "./Mancala.css";
 
 /**
  * The base component for the Mancala game. If there's no active game, the `StartGame` component allows

@@ -1,6 +1,6 @@
 import React from "react";
 import type { GameState } from "../gameState";
-import "./Play Mancala.css";
+import "./Play.css";
 
 type PlayProps = {
     gameState: GameState;
