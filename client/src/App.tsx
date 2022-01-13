@@ -14,7 +14,7 @@ export function App() {
             <div className="main-content">
                 <Switch>
                     {/* If the user goes to the url /about, show the about page */}
-                    <Route path="/howToPlay">
+                    <Route path="/howtoplay">
                         <HowToPlay />
                     </Route>
 
