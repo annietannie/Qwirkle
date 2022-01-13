@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from "./Header/Header";
 import { HowToPlay } from "./HowToPlay/HowToPlay";
-import { Mancala } from "./Mancala/Mancala";
 import { QwirkleTemp } from "./Qwirkle/QwirkleTemp";
 import "./App.css";
 
@@ -19,14 +18,14 @@ export function App() {
                         <HowToPlay />
                     </Route>
 
-                    <Route path="/qwirkletemp">
+                    <Route path="/">
                         <QwirkleTemp />
                     </Route>
 
-                    {/* If the user goes to any other url, show the play page */}
+                    {/* If the user goes to any other url, show the play page
                     <Route path="/">
                         <Mancala />
-                    </Route>
+                    </Route> */}
                 </Switch>
             </div>
         </Router>

@@ -1,8 +1,26 @@
-import React from "react"
+import React, { useState } from "react"
 import "./QwirkleTemp.css";
 import confirm from './Buttons/Confirm.png'
 import undo from './Buttons/Undo.png'
 import trade from './Buttons/Trade.png'
+
+class Counter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <p>You clicked {this.state.count} times</p>
+            </div>>)
+    }
+}
+
+const [count, setCount] = useState(0);
 
 class GridSquare extends React.Component {
     render() {
