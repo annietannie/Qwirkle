@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import "./QwirkleTemp.css";
+import "./Qwirkle.css";
 import confirm from './Buttons/Confirm.png'
 import undo from './Buttons/Undo.png'
 import trade from './Buttons/Trade.png'
@@ -137,7 +137,7 @@ class Game extends React.Component {
     }
 }
 
-export function QwirkleTemp() {
+export function Qwirkle() {
     return (
     <div className="QwirkleBoard">
         <h1>Qwirkle!</h1>

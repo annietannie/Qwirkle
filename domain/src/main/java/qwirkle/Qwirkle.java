@@ -10,6 +10,22 @@ public interface Qwirkle {
 	 */
 	boolean isPlayersTurn(int player);
 	
+	String getPlayerTileShape(int player, int index);
+
+	String getPlayerTileColour(int player, int index);
+
+	int getBoardSizeX();
+
+	int getBoardSizeY();
+
+	boolean isBoardTileNull(int x, int y);
+
+	String getBoardTileShape(int x, int y);
+
+	String getBoardTileColour(int x, int y);
+
+	int getNumberOfTilesLeft();
+
 	/* void placeTile(int index, Player player) throws QwirkleException;
 
 	void cancelMove(Player player);

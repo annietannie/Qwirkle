@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from "./Header/Header";
 import { HowToPlay } from "./HowToPlay/HowToPlay";
-import { QwirkleTemp } from "./Qwirkle/QwirkleTemp";
+import { Qwirkle } from "./Qwirkle/Qwirkle";
 import "./App.css";
 
 export function App() {
@@ -19,7 +19,7 @@ export function App() {
                     </Route>
 
                     <Route path="/">
-                        <QwirkleTemp />
+                        <Qwirkle />
                     </Route>
                 </Switch>
             </div>
