@@ -21,11 +21,6 @@ export function App() {
                     <Route path="/">
                         <QwirkleTemp />
                     </Route>
-
-                    {/* If the user goes to any other url, show the play page
-                    <Route path="/">
-                        <Mancala />
-                    </Route> */}
                 </Switch>
             </div>
         </Router>

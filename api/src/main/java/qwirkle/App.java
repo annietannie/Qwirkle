@@ -1,4 +1,4 @@
-package mancala;
+package qwirkle;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -9,7 +9,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import mancala.api.*;
+import qwirkle.api.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -38,12 +38,12 @@ public class App {
 
     private static void registerServlets(ServletContextHandler context) {
         // Use the Jersey framework to translate the classes in the
-        // mancala.api package to server endpoints (servlets).
+        // qwirkle.api package to server endpoints (servlets).
         // For example, the StartMancala class will become an endpoint at
-        // http://localost:8080/mancala/api/start
-        ServletHolder serverHolder = context.addServlet(ServletContainer.class, "/mancala/api/*");
+        // http://localost:8080/qwirkle/api/start
+        ServletHolder serverHolder = context.addServlet(ServletContainer.class, "/qwirkle/api/*");
         serverHolder.setInitOrder(1);
         serverHolder.setInitParameter("jersey.config.server.provider.packages", 
-                "mancala.api");
+                "qwirkle.api");
     }
 }

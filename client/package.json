@@ -1,7 +1,7 @@
 {
-  "name": "mancala-mvc",
+  "name": "qwirkle-mvc",
   "version": "1.0.0",
-  "description": "Front-end for the mancala mvc",
+  "description": "Front-end for the qwirkle mvc",
   "private": true,
   "scripts": {
     "start": "snowpack dev",
