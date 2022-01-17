@@ -10,13 +10,11 @@ export function HowToPlay() {
         </p>
 
         <h3>Play</h3>
-        <p>
-            On your turn, you can do two things:
-            <ol>
-                <li>Place one or more tiles to the grid and then draw tiles to bring your hand up to six</li>
-                <li>Trade one or more tiles for different tiles</li>
-            </ol>
-        </p>
+        <p>On your turn, you can do two things:</p>
+        <ol>
+            <li>Place one or more tiles to the grid and then draw tiles to bring your hand up to six</li>
+            <li>Trade one or more tiles for different tiles</li>
+        </ol>
 
         <h3>Adding to the grid</h3>
         <p>

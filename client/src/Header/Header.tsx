@@ -14,6 +14,7 @@ export function Header() {
         <div className="main-navigation">
             <Link to="/">Play</Link>
             <Link to="/howToPlay">How to Play</Link>
+            {/* <Link to="/qwirkletemp">Qwirkle template</Link> */}
         </div>
     </header>
 }

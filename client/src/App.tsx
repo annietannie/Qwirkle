@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from "./Header/Header";
 import { HowToPlay } from "./HowToPlay/HowToPlay";
-import { Mancala } from "./Mancala/Mancala";
+import { Qwirkle } from "./Qwirkle/Qwirkle";
 import "./App.css";
 
 export function App() {
@@ -18,9 +18,8 @@ export function App() {
                         <HowToPlay />
                     </Route>
 
-                    {/* If the user goes to any other url, show the play page */}
                     <Route path="/">
-                        <Mancala />
+                        <Qwirkle />
                     </Route>
                 </Switch>
             </div>

@@ -1,20 +1,19 @@
-
 export interface GameState {
-    players: [ Player, Player ]; // a player array contains exactly two Players
-    gameStatus: {
-        endOfGame: boolean;
-        winner: string;
-    };
+    players: Player[];
+    gameBoard: Board;
+    numberOfTilesLeft: number;
 }
 
 interface Player {
-    name: string;
-    pits: Pit[];
-    type: "player1" | "player2"; // only "player1" and "player2" are valid options for this string
+    tiles: Tile[];
     hasTurn: boolean;
 }
 
-interface Pit {
-    index: number;
-    nrOfStones: number;
+interface Board {
+    tiles: Tile[][];
+}
+
+interface Tile {
+    shape: "CIRCLE" | "SQUARE" | "DIAMOND" | "CLUB" | "FOURSTAR" | "EIGHTSTAR";
+    colour: "RED" | "ORANGE" | "YELLOW" | "GREEN" | "BLUE" | "PURPLE";
 }
