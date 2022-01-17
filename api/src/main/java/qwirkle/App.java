@@ -39,7 +39,7 @@ public class App {
     private static void registerServlets(ServletContextHandler context) {
         // Use the Jersey framework to translate the classes in the
         // qwirkle.api package to server endpoints (servlets).
-        // For example, the StartMancala class will become an endpoint at
+        // For example, the StartQwirkle class will become an endpoint at
         // http://localost:8080/qwirkle/api/start
         ServletHolder serverHolder = context.addServlet(ServletContainer.class, "/qwirkle/api/*");
         serverHolder.setInitOrder(1);

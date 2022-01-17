@@ -9,15 +9,22 @@ import jakarta.ws.rs.core.*;
 import qwirkle.api.models.*;
 import qwirkle.QwirkleImpl;
 
-@path("/start")
+@Path("/start")
 public class StartQwirkle {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response initialize(
         @Context HttpServletRequest request,
-        int numberOfPlayers) {
+        Integer numberOfPlayers) {
+           
             var qwirkle = new QwirkleImpl(numberOfPlayers);
 
+            HttpSession session = request.getSession(true);
+            session.setAttribute("qwirkle", qwirkle);
+            session.setAttribute("numberOfPlayers", numberOfPlayers);
+            
+            var output = new Qwirkle(qwirkle, numberOfPlayers);
+            return Response.status(200).entity(output).build();
         }
 }

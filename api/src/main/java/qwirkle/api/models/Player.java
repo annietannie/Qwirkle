@@ -12,6 +12,7 @@ public class Player {
             String shape = qwirkle.getPlayerTileShape(playerNumber, i);
             String colour = qwirkle.getPlayerTileColour(playerNumber, i);
             Tile tile = new Tile(shape, colour);
+            this.tiles[i] = tile;
         }
     }
 

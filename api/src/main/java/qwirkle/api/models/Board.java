@@ -14,6 +14,7 @@ public class Board {
                     String shape = qwirkle.getBoardTileShape(x, y);
                     String colour = qwirkle.getBoardTileColour(x, y);
                     Tile tile = new Tile(shape, colour);
+                    this.grid[y][x] = tile;
                 }
             }
         }

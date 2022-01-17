@@ -2,7 +2,7 @@ package qwirkle.api.models;
 
 public class Qwirkle {
     Player[] players;
-    Board board;
+    Board gameBoard;
     int numberOfTilesLeft;
 
     public Qwirkle(qwirkle.Qwirkle qwirkle, int numberOfPlayers) {
@@ -13,12 +13,14 @@ public class Qwirkle {
 
         int xLength = qwirkle.getBoardSizeX();
         int yLength = qwirkle.getBoardSizeY();
-        this.board = new Board(qwirkle, xLength, yLength);
+        this.gameBoard = new Board(qwirkle, xLength, yLength);
 
         this.numberOfTilesLeft = qwirkle.getNumberOfTilesLeft();
     }
 
     public Player[] getPlayers() { return players; }
 
+    public Board getGameBoard() { return gameBoard; }
 
+    public int getNumberOfTilesLeft() { return numberOfTilesLeft; }
 }
