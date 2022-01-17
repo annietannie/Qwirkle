@@ -10,7 +10,6 @@ type PlayProps = {
     setGameState(newGameState: GameState): void;
 }
 
-
 function Counter() {
     const [count, setCount] = useState(0);
 
@@ -43,87 +42,72 @@ function Counter() {
     )
 }
 
-class GridSquare extends React.Component {
-    render() {
-        return (
-            <button className="gridSquare"></button>
-        );
-    }
-}
-
-class HandSquare extends React.Component {
-    render() {
-        return (
-            <button className="handSquare"></button>
-        );
-    }
-}
-
-class Board extends React.Component {
-    renderGridSquare() {
-        return <GridSquare />;
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="board-row">
-                    {this.renderGridSquare()}
-                    {this.renderGridSquare()}    
-                    {this.renderGridSquare()}
-                </div>
-                <div className="board-row">
-                    {this.renderGridSquare()}
-                    {this.renderGridSquare()}    
-                    {this.renderGridSquare()}
-                </div>
-                <div className="board-row">
-                    {this.renderGridSquare()}
-                    {this.renderGridSquare()}    
-                    {this.renderGridSquare()}
-                </div>
-            </div>
-        );
-    }
-}
-
-class Game extends React.Component {
-    render() {
-        return (
-            <div className="game">
-                <div className="game-board">
-                    <Board />
-                </div>
-            </div>
-        );
-    }
-}
-
 export function Play({ gameState, setGameState}: PlayProps) {
     const handPlayer1 = gameState.players[0].tiles;
-    const board = gameState.gameBoard.grid;
+    const board = gameState.gameBoard.tiles;
+
+    function sayHello() {
+        console.log("Click");
+    }
 
     return (
     <div className="QwirkleBoard">
-        <h1>Qwirkle!</h1>
-        <Game />
 
-        <div className="game-board">
-            {board.map(tileRow => <div 
-                className="boardRow">
-                    {tileRow.map(tile => <img
-                        className="tile"
-                        src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
-                        ></img>)}
-                </div>
-            )}
+    <div className="gameBoard">
+        {board.map((tileRow, i) => {
+                return (
+                    <div
+                        className="boardRow" key={i}>
+                        {tileRow.map((tile, j) => {
+                            if (tile == null) {
+                                return (
+                                <button 
+                                    id="emptyGridTile" 
+                                    className="tile"
+                                    type="button"
+                                    key={j}
+                                    onClick={sayHello}
+                                ></button>
+                                )
+                            } else {
+                                return (
+                                <img
+                                    className="tile"
+                                    key={j}
+                                    src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                                ></img>
+                                )
+                            }
+                        })}
+                    </div>
+                )
+            })}
         </div>
 
+        <div></div>
+
         <div className="hand-player1">
-            {handPlayer1.map(tile => <img
-                className="tile"
-                src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
-                ></img>)}
+            {handPlayer1.map((tile, j) => {
+                if(tile == null) {
+                    return (
+                        <div
+                            id="emptyHandTile"
+                            className="tile"
+                            key={j} />
+                    )
+                } else {
+                    return (
+                        <input
+                            id="handTile"
+                            className="tile"
+                            type="image"
+                            key={j}
+                            src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                            onClick={sayHello}
+                        ></input>
+                    )
+                }
+            })}
         </div>
 
         <div className="buttons">

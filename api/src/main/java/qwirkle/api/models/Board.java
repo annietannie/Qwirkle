@@ -2,23 +2,23 @@ package qwirkle.api.models;
 
 public class Board {
 
-    Tile[][] grid;
+    Tile[][] tiles;
     
     public Board(qwirkle.Qwirkle qwirkle, int xLength, int yLength) {
-        this.grid = new Tile[yLength][xLength];
+        this.tiles = new Tile[yLength][xLength];
         for (int x=0; x<xLength; x++) {
             for (int y=0; y<yLength; y++) {
                 if (qwirkle.isBoardTileNull(x, y)) {
-                    grid[y][x] = null;
+                    tiles[y][x] = null;
                 } else {
                     String shape = qwirkle.getBoardTileShape(x, y);
                     String colour = qwirkle.getBoardTileColour(x, y);
                     Tile tile = new Tile(shape, colour);
-                    this.grid[y][x] = tile;
+                    this.tiles[y][x] = tile;
                 }
             }
         }
     }
 
-    public Tile[][] getTiles() { return grid; }
+    public Tile[][] getTiles() { return tiles; }
 }

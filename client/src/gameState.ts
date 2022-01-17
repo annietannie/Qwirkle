@@ -10,7 +10,7 @@ interface Player {
 }
 
 interface Board {
-    grid: Tile[][];
+    tiles: Tile[][];
 }
 
 interface Tile {

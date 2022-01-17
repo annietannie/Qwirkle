@@ -17,32 +17,50 @@ h1 {
     text-align: center;
 }
 
-.gridSquare {
-    background-color: rgb(0, 121, 182);
-    opacity: 20%
-    ;
+.gameBoard {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.boardRow {
+    align-items: center;
+    justify-content: center;
+}
+
+#emptyGridTile {
+    background-color: rgb(0, 170, 255);
+    opacity: 30%;
     border: 0px;
-    border-radius: 5px;
+}
+
+#emptyHandTile {
+    background-color: black;
+    border: 0px;
+}
+
+.tile {
     height: 50px;
     width: 50px;
-    margin: 1px;
+    margin: 2px; 
+    border-radius: 5px;
+}
+
+#handTile:focus {
+    opacity: 40%;
 }
 
 .button img {
     height: 50px;
     width: 50px;
-    margin: 1px; 
+    margin: 4px; 
 }
 
 .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 30px;
 }
 
-.tile {
-    height: 50px;
-    width: 50px;
-    margin: 1px; 
-    border-radius: 5px;
-}
