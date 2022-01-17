@@ -125,8 +125,6 @@ class Buttons extends React.Component {
 }
 
 
-
-
 class Game extends React.Component {
     render() {
         return (
@@ -150,7 +148,7 @@ class Game extends React.Component {
 
 export function Play({ gameState, setGameState}: PlayProps) {
 
-    
+
     return (
     <div className="QwirkleBoard">
         <h1>Qwirkle!</h1>
@@ -158,6 +156,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
         <div className="TileBag">
             <p>Tiles left in tile bag: </p>
         </div>
+        <img src="./Tiles/SQUARE_RED.png" className="tile"></img>
         <Counter />        
     </div>
     )
