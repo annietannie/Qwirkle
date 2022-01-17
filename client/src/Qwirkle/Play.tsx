@@ -87,29 +87,46 @@ class Board extends React.Component {
     }
 }
 
-class Tilehand extends React.Component {
-    renderHandSquare() {
-        return <HandSquare />;
-    }
-
+class Game extends React.Component {
     render() {
         return (
-            <div>
-                {this.renderHandSquare()}
-                {this.renderHandSquare()}
-                {this.renderHandSquare()}
-                {this.renderHandSquare()}
-                {this.renderHandSquare()}
-                {this.renderHandSquare()}
-            </div>      
+            <div className="game">
+                <div className="game-board">
+                    <Board />
+                </div>
+            </div>
         );
     }
 }
 
-class Buttons extends React.Component {
-    render() {
-        return (
-            <div className="tiles">
+export function Play({ gameState, setGameState}: PlayProps) {
+    const handPlayer1 = gameState.players[0].tiles;
+    const board = gameState.gameBoard.grid;
+
+    return (
+    <div className="QwirkleBoard">
+        <h1>Qwirkle!</h1>
+        <Game />
+
+        <div className="game-board">
+            {board.map(tileRow => <div 
+                className="boardRow">
+                    {tileRow.map(tile => <img
+                        className="tile"
+                        src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                        ></img>)}
+                </div>
+            )}
+        </div>
+
+        <div className="hand-player1">
+            {handPlayer1.map(tile => <img
+                className="tile"
+                src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                ></img>)}
+        </div>
+
+        <div className="buttons">
                 <div id="confirm" className="button">
                     <img src={confirm}></img>
                 </div>
@@ -120,43 +137,11 @@ class Buttons extends React.Component {
                     <img src={undo}></img>
                 </div>
             </div>
-        );
-    }
-}
 
-
-class Game extends React.Component {
-    render() {
-        return (
-            <div className="game">
-                <div className="game-board">
-                    <Board />
-                </div>
-                <div className="hand-buttons">
-                    <div className="tile-hand">
-                        <Tilehand />
-                    </div>
-                    <div className="Buttons">
-                        <Buttons />
-                    </div>
-                </div>
-                
-            </div>
-        );
-    }
-}
-
-export function Play({ gameState, setGameState}: PlayProps) {
-
-
-    return (
-    <div className="QwirkleBoard">
-        <h1>Qwirkle!</h1>
-        <Game />
         <div className="TileBag">
-            <p>Tiles left in tile bag: </p>
+            <p>Tiles left in tile bag: {gameState.numberOfTilesLeft}</p>
         </div>
-        <img src="./Tiles/SQUARE_RED.png" className="tile"></img>
+        
         <Counter />        
     </div>
     )
