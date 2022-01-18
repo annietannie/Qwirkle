@@ -50,38 +50,15 @@ public class Player {
     }
 
     public void playTile(int index, int x, int y) {
-        if (myTurn) {
+        if (myTurn && changingTiles == null) {
             if (board.placeTile(tiles.get(index), x, y, index)) {
                 tiles.set(index, null);
             }
         }
     }
 
-    public void confirmMove() {
-        if (myTurn) {
-            board.confirmMove();
-            for (int i=0; i<6; i++) {
-                if (tiles.get(i) == null) {
-                    grabTile(i);
-                }
-            }
-            endOfTurn();
-        }
-    }
-
-    public void cancelMove() {
-        if (myTurn) {
-            List<List<Object>> resetList = board.cancelMove();
-            for (List<Object> resetTile : resetList) {
-                Tile tile = (Tile) resetTile.get(0);
-                int index = (int) resetTile.get(3);
-                setTile(tile, index);
-            }
-        }
-    }
-
     public void changeTile(int index) {
-        if (myTurn && tileBag.getNumberOfTiles() > 0) {
+        if (myTurn && tileBag.getNumberOfTiles() > 0 && !board.doesMoveExist()) {
             if (changingTiles == null) {
                 changingTiles = new ArrayList<>();
             }
@@ -90,36 +67,77 @@ public class Player {
                 changeThisTile.add(tiles.get(index));
                 changeThisTile.add(index);
                 changingTiles.add(changeThisTile);
+                tiles.set(index, null);
             }
         }
     }
 
-    public void confirmChanging() {
+    public void confirmTurn() {
         if (myTurn) {
-            List<List<Object>> newTiles = tileBag.changeTheseTiles(changingTiles);
-            for (List<Object> newTile : newTiles) {
-                Tile tile = (Tile) newTile.get(0);
-                int index = (int) newTile.get(1);
-                setTile(tile, index);
+            if (board.doesMoveExist()) {
+                confirmMove();
+            } if (changingTiles != null) {
+                confirmChanging();
             }
             endOfTurn();
         }
     }
 
-    public void cancelChanging() {
+    public void confirmChanging() {
+        List<List<Object>> newTiles = tileBag.changeTheseTiles(changingTiles);
+        for (List<Object> newTile : newTiles) {
+            Tile tile = (Tile) newTile.get(0);
+            int index = (int) newTile.get(1);
+            setTile(tile, index);
+        }
+    }
+
+    public void confirmMove() {
+        board.confirmMove();
+        for (int i=0; i<6; i++) {
+            if (tiles.get(i) == null) {
+                grabTile(i);
+            }
+        }
+    }
+
+    public void cancelTurn() {
         if (myTurn) {
-            changingTiles.clear();
             if (board.doesMoveExist()) {
                 cancelMove();
+            } if (changingTiles != null) {
+                cancelChanging();
             }
+        }
+    }
+
+    public void cancelMove() {
+        List<List<Object>> resetList = board.cancelMove();
+        if (resetList != null) {
+            for (List<Object> resetTile : resetList) {
+                Tile tile = (Tile) resetTile.get(0);
+                int index = (int) resetTile.get(3);
+                setTile(tile, index);
+            }
+        }
+    }
+
+    public void cancelChanging() {
+        for (List<Object> resetTile : changingTiles) {
+            Tile tile = (Tile) resetTile.get(0);
+            int index = (int) resetTile.get(3);
+            setTile(tile, index);
+        }
+        changingTiles = null;
+        
+        if (board.doesMoveExist()) {
+            cancelMove();
         }
     }
 
     protected void endOfTurn() {
         // Reset temporary lists
-        if (changingTiles != null) {
-            changingTiles.clear();
-        }
+        changingTiles = null;
 
         if (isGameOver()) {
             endOfGame();

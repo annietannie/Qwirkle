@@ -4,9 +4,10 @@
 
 body {
     background-image: url("QwirkleAchtergrond.png");
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: center top;
+    background-position: center bottom;
 }
 
 h1 {
@@ -18,7 +19,7 @@ h1 {
 }
 
 .gameBoard {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
     align-items: center;
     justify-content: center;
@@ -61,7 +62,19 @@ h1 {
 .button img {
     height: 50px;
     width: 50px;
-    margin: 4px; 
+    margin: 4px;
+    box-shadow: 2px 4px rgb(170, 170, 170);
+    border-radius: 50px;
+    border: 2px outset white;
+}
+
+.button img:hover {
+    box-shadow: 2px 4px rgb(143, 143, 143);
+}
+
+.button img:active {
+    transform: translateY(2px) translateX(1px);
+    box-shadow: 1px 2px rgb(53, 53, 53);
 }
 
 .buttons {

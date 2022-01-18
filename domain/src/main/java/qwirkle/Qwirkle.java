@@ -30,17 +30,10 @@ public interface Qwirkle {
 
 	void playTile(int player, int index, int x, int y);
 
-	/* void placeTile(int index, Player player) throws QwirkleException;
+	void confirmTurn(int player);
 
-	void cancelMove(Player player);
+	void cancelTurn(int player);
 
-	void confirmMove(Player player) throws QwirkleException;
+	void tradeTile(int player, int index);
 
-	void changeTile(int index, Player player) throws QwirkleException;
-
-	void confirmChange(Player player);
-
-	void cancelChange(Player player) throws QwirkleException;
-	
-	boolean isEndOfGame(); */
 }

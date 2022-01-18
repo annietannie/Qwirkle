@@ -45,25 +45,97 @@ function Counter() {
 export function Play({ gameState, setGameState}: PlayProps) {
     const handPlayer1 = gameState.players[0].tiles;
     const board = gameState.gameBoard.tiles;
+    var yourTurn: boolean = gameState.players[0].hasTurn;
     var selectedTile: number | null = null;
     var player: number = 0;
 
     function selectTile(index: number) {
-        selectedTile = index;
+        if (handPlayer1[index] != null) {
+            selectedTile = index;
+        }
     }
 
     async function placeTile(y: number, x: number) {
+        if (selectedTile != null) {
+            try {
+                const response = await fetch('qwirkle/api/playtile', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ player, selectedTile, x, y })
+                });
+                
+                console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
+
+                if (response.ok) {
+                    const gameState = await response.json();
+                    console.log(gameState);
+                        if ("players" in gameState) {
+                            localStorage.setItem("gameState", JSON.stringify(gameState));
+                            setGameState(gameState);
+                        } else {
+                            alert(gameState.message);
+                        }
+                } else {
+                    console.error(response.statusText);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    async function tradeTile() {
+        if (selectedTile != null) {
+            try {
+                const response = await fetch('qwirkle/api/trade', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    // for now default player is player 1
+                    body: JSON.stringify({ player, selectedTile })
+                });
+
+                if (response.ok) {
+                    console.log("let's trade tile " + selectedTile);
+                    const gameState = await response.json();
+                    console.log(gameState);
+                        if ("players" in gameState) {
+                            localStorage.setItem("gameState", JSON.stringify(gameState));
+                            setGameState(gameState);
+                        } else {
+                            alert(gameState.message);
+                        }
+                } else {
+                    console.error(response.statusText);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    async function restart() {
+        localStorage.clear();
+        setGameState(undefined);
+        window.location.reload(false);
+    }
+
+    async function confirmTurn() {
         try {
-            const response = await fetch('qwirkle/api/playtile', {
+            const response = await fetch('qwirkle/api/confirmturn', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ player, selectedTile, x, y })
+                // for now default player is player 1
+                body: JSON.stringify(0)
             });
-            
-            console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
 
             if (response.ok) {
                 const gameState = await response.json();
@@ -82,16 +154,41 @@ export function Play({ gameState, setGameState}: PlayProps) {
         }
     }
 
-    async function restart() {
-        localStorage.clear();
-        setGameState(undefined);
-        window.location.reload(false);
+    async function cancelTurn() {
+        try {
+            const response = await fetch('qwirkle/api/cancelturn', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                // for now default player is player 1
+                body: JSON.stringify(0)
+            });
+
+            if (response.ok) {
+                const gameState = await response.json();
+                console.log(gameState);
+                    if ("players" in gameState) {
+                        localStorage.setItem("gameState", JSON.stringify(gameState));
+                        setGameState(gameState);
+                    } else {
+                        alert(gameState.message);
+                    }
+            } else {
+                console.error(response.statusText);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
     <div className="QwirkleBoard">
 
-    <div className="gameBoard">
+        <h2>{ yourTurn ? `Your turn!` : `Not your turn`} </h2>
+
+        <div className="gameBoard">
         {board.map((tileRow, i) => {
                 return (
                     <div
@@ -122,8 +219,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
             })}
         </div>
 
-        <div></div>
-
         <div className="hand-player">
             {handPlayer1.map((tile, j) => {
                 if(tile == null) {
@@ -139,6 +234,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                         <input
                             id="handTile"
                             className="tile"
+                            draggable="true"
                             type="image"
                             key={j}
                             src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
@@ -151,13 +247,25 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
         <div className="buttons">
                 <div id="confirm" className="button">
-                    <img src={confirm}></img>
+                    <img 
+                        src={confirm}
+                        draggable="false"
+                        onClick={() => confirmTurn()}
+                    ></img>
                 </div>
                 <div id="trade" className="button">
-                    <img src={trade}></img>
+                    <img 
+                        src={trade}
+                        draggable="false"
+                        onClick={() => tradeTile()}
+                    ></img>
                 </div>
                 <div id="undo" className="button">
-                    <img src={undo}></img>
+                    <img 
+                        src={undo}
+                        draggable="false"
+                        onClick={() => cancelTurn()}
+                    ></img>
                 </div>
             </div>
 

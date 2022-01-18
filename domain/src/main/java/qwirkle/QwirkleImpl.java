@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class QwirkleImpl implements Qwirkle {
     private List<Player> players = new ArrayList<Player>();
     private Board board;
-    private int numberOfTilesLeft;
     public static QwirkleImpl qwirkle;
     
     public QwirkleImpl(int numberOfPlayers) {
@@ -17,7 +16,6 @@ public class QwirkleImpl implements Qwirkle {
             players.add(players.get(i-1).getNeighbour());
         }
         this.board = players.get(0).getBoard();
-        this.numberOfTilesLeft = players.get(0).getTileBag().getNumberOfTiles();
     }
 
     @Override
@@ -69,13 +67,29 @@ public class QwirkleImpl implements Qwirkle {
 
     @Override
     public int getNumberOfTilesLeft() {
-        return numberOfTilesLeft;
+        return players.get(0).getTileBag().getNumberOfTiles();
     }
 
     @Override
     public void playTile(int player, int index, int x, int y) {
         players.get(player).playTile(index, x, y);
     }
+
+    @Override
+    public void confirmTurn(int player) {
+        players.get(player).confirmTurn();
+    };
+
+    @Override
+    public void cancelTurn(int player) {
+        players.get(player).cancelTurn();
+    }
+
+    @Override
+    public void tradeTile(int player, int index) {
+        players.get(player).changeTile(index);
+    }
+
     /* @Override
     public boolean isEndOfGame() {
         boolean isGameIsOver = false;
