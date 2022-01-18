@@ -28,6 +28,11 @@ public class QwirkleImpl implements Qwirkle {
     }
 
     @Override
+    public boolean isPlayerTileNull(int player, int index) {
+        return players.get(player).getTile(index) == null ? true : false;
+    }
+
+    @Override
     public String getPlayerTileShape(int player, int index) {
         return players.get(player).getTile(index).getShape().toString();
     }
@@ -67,6 +72,10 @@ public class QwirkleImpl implements Qwirkle {
         return numberOfTilesLeft;
     }
 
+    @Override
+    public void playTile(int player, int index, int x, int y) {
+        players.get(player).playTile(index, x, y);
+    }
     /* @Override
     public boolean isEndOfGame() {
         boolean isGameIsOver = false;

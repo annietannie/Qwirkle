@@ -45,9 +45,47 @@ function Counter() {
 export function Play({ gameState, setGameState}: PlayProps) {
     const handPlayer1 = gameState.players[0].tiles;
     const board = gameState.gameBoard.tiles;
+    var selectedTile: number | null = null;
+    var player: number = 0;
 
-    function sayHello() {
-        console.log("Click");
+    function selectTile(index: number) {
+        selectedTile = index;
+    }
+
+    async function placeTile(y: number, x: number) {
+        try {
+            const response = await fetch('qwirkle/api/playtile', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ player, selectedTile, x, y })
+            });
+            
+            console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
+
+            if (response.ok) {
+                const gameState = await response.json();
+                console.log(gameState);
+                    if ("players" in gameState) {
+                        localStorage.setItem("gameState", JSON.stringify(gameState));
+                        setGameState(gameState);
+                    } else {
+                        alert(gameState.message);
+                    }
+            } else {
+                console.error(response.statusText);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function restart() {
+        localStorage.clear();
+        setGameState(undefined);
+        window.location.reload(false);
     }
 
     return (
@@ -66,7 +104,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                                     className="tile"
                                     type="button"
                                     key={j}
-                                    onClick={sayHello}
+                                    onClick={() => placeTile(i, j)}
                                 ></button>
                                 )
                             } else {
@@ -86,14 +124,15 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
         <div></div>
 
-        <div className="hand-player1">
+        <div className="hand-player">
             {handPlayer1.map((tile, j) => {
                 if(tile == null) {
                     return (
                         <div
                             id="emptyHandTile"
                             className="tile"
-                            key={j} />
+                            key={j}>
+                        </div>
                     )
                 } else {
                     return (
@@ -103,7 +142,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                             type="image"
                             key={j}
                             src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
-                            onClick={sayHello}
+                            onClick={() => selectTile(j)}
                         ></input>
                     )
                 }
@@ -125,6 +164,8 @@ export function Play({ gameState, setGameState}: PlayProps) {
         <div className="TileBag">
             <p>Tiles left in tile bag: {gameState.numberOfTilesLeft}</p>
         </div>
+
+        <button type="button" className="restart" onClick={() => restart()}>Restart</button>
         
         <Counter />        
     </div>

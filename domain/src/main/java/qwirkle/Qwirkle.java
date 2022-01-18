@@ -9,6 +9,8 @@ public interface Qwirkle {
 	 * @return True if the first player has the next turn, false if it's the turn of the other player.
 	 */
 	boolean isPlayersTurn(int player);
+
+	boolean isPlayerTileNull(int player, int index);
 	
 	String getPlayerTileShape(int player, int index);
 
@@ -25,6 +27,8 @@ public interface Qwirkle {
 	String getBoardTileColour(int x, int y);
 
 	int getNumberOfTilesLeft();
+
+	void playTile(int player, int index, int x, int y);
 
 	/* void placeTile(int index, Player player) throws QwirkleException;
 

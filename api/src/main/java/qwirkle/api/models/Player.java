@@ -9,10 +9,14 @@ public class Player {
         this.hasTurn = qwirkle.isPlayersTurn(playerNumber);
         this.tiles = new Tile[6];
         for (int i=0; i<6; i++) {
-            String shape = qwirkle.getPlayerTileShape(playerNumber, i);
-            String colour = qwirkle.getPlayerTileColour(playerNumber, i);
-            Tile tile = new Tile(shape, colour);
-            this.tiles[i] = tile;
+            if (qwirkle.isPlayerTileNull(playerNumber, i)) {
+                this.tiles[i] = null;
+            } else {
+                String shape = qwirkle.getPlayerTileShape(playerNumber, i);
+                String colour = qwirkle.getPlayerTileColour(playerNumber, i);
+                Tile tile = new Tile(shape, colour);
+                this.tiles[i] = tile;
+            }
         }
     }
 
