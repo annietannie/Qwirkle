@@ -19,8 +19,8 @@ h1 {
 }
 
 .gameBoard {
-    padding-top: 30px;
-    padding-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 50px;
     align-items: center;
     justify-content: center;
 }
@@ -81,6 +81,27 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.bagContainer {
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tileBag {
+    width: 100px;
+}
+
+.tilesLeft {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25pt;
+    font-weight: bold;
+    text-shadow: 3px 3px rgb(197, 173, 168);
 }
 

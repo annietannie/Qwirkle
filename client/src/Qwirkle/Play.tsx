@@ -3,6 +3,7 @@ import "./Play.css";
 import confirm from './Buttons/Confirm.png'
 import undo from './Buttons/Undo.png'
 import trade from './Buttons/Trade.png'
+import bag from './Buttons/TileBag.png'
 import type { GameState } from "src/gameState";
 
 type PlayProps = {
@@ -199,7 +200,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
                                 <button 
                                     id="emptyGridTile" 
                                     className="tile"
-                                    type="button"
                                     key={j}
                                     onClick={() => placeTile(i, j)}
                                 ></button>
@@ -209,6 +209,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                                 <img
                                     className="tile"
                                     key={j}
+                                    draggable="false"
                                     src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
                                 ></img>
                                 )
@@ -269,8 +270,11 @@ export function Play({ gameState, setGameState}: PlayProps) {
                 </div>
             </div>
 
-        <div className="TileBag">
-            <p>Tiles left in tile bag: {gameState.numberOfTilesLeft}</p>
+        <div className="bagContainer">
+            <img
+                className="tileBag" 
+                src={bag} />
+            <div className="tilesLeft">{gameState.numberOfTilesLeft}</div>
         </div>
 
         <button type="button" className="restart" onClick={() => restart()}>Restart</button>
