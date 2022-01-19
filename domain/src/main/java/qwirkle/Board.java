@@ -24,7 +24,7 @@ public class Board {
     /* Placing a tile */
     protected Boolean placeTile(Tile tile, int x, int y, int index) {
         // check if move is valid
-        if (!placementIsValid(x, y)) { return false; }
+        if (!placementIsValid(x, y, tile)) { return false; }
 
         // Handle move
         if (isFirstTileInLine()) {
@@ -105,15 +105,16 @@ public class Board {
     }
 
     /* Checks for placing a tile */
-    protected Boolean placementIsValid(int x, int y) {
+    protected Boolean placementIsValid(int x, int y, Tile tile) {
         if (!isFirstMove()) {
             if (isFirstTileInLine()) {
                 if (!adjacentToExistingTiles(x, y)) 
                 { return false; }
-            }
+            } else if (!isInLineWithSeries(x, y))
+            { return false; }
             if (
-                overlapsTileInGrid(x, y) 
-                || !isInLineWithSeries(x, y)) 
+                overlapsTileInGrid(x, y)
+                || !fitsInSeries(x, y, tile)) 
             { return false; }
         }
         return true;
@@ -165,9 +166,140 @@ public class Board {
         return false;
     }
 
-    /* protected Boolean fitsInSeries(int x, int y, Tile tile) {
+    protected Boolean fitsInSeries(int x, int y, Tile tile) {
+        
+        List<List<Tile>> series = getSeries(x, y);
+        Shape shape = tile.getShape();
+        Colour colour = tile.getColour();
 
-    } */
+        for (List<Tile> serie : series) {
+            if (serie.size() > 0) {
+
+                Shape shape1 = serie.get(0).getShape();
+                Colour colour1 = serie.get(0).getColour();
+                serie.add(tile);
+                Shape shape2 = serie.get(1).getShape();
+                Colour colour2 = serie.get(1).getColour();
+
+                if (shape1 == shape2 && colour1 != colour2) {
+                    // Same shape
+                    if (!allTilesHaveSameShape(serie, shape1)) {
+                        return false;
+                    }
+                } else if (shape1 != shape2 && colour1 == colour2) {
+                    // Same colour
+                    if (!allTilesHaveSameColour(serie, colour1)) {
+                        return false;
+                    }
+                } else {
+                    // All is different or the same
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    protected Boolean allTilesHaveSameColour(List<Tile> serie, Colour colour) {
+        List<Shape> shapes = new ArrayList<>();
+
+        for (Tile tile : serie) {
+            if (tile.getColour() != colour 
+            || doesThisShapeAlreadyExist(shapes, tile.getShape()))
+            {
+                return false;
+            }
+            shapes.add(tile.getShape());
+        }
+        return true;
+    }
+
+    protected Boolean allTilesHaveSameShape(List<Tile> serie, Shape shape) {
+        List<Colour> colours = new ArrayList<>();
+
+        for (Tile tile : serie) {
+            if (tile.getShape() != shape
+            || doesThisColourAlreadyExist(colours, tile.getColour())) 
+            {
+                return false;
+            }
+            colours.add(tile.getColour());
+        }
+        return true;
+    }
+
+    protected Boolean doesThisShapeAlreadyExist(List<Shape> shapes, Shape tileShape) {
+        for (Shape shape : shapes) {
+            if (shape == tileShape) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected Boolean doesThisColourAlreadyExist(List<Colour> colours, Colour tileColour) {
+        for (Colour colour : colours) {
+            if (colour == tileColour) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    protected List<List<Tile>> getSeries(int x, int y) {
+        List<List<Tile>> series = new ArrayList<>();
+        List<Tile> horizontal = new ArrayList<>();
+        List<Tile> vertical = new ArrayList<>();
+        List<List<Object>> neighbours = getNeighbourTiles(x,y);
+
+        int nextY;
+        int nextX;
+
+        for (List<Object> neighbour : neighbours) {
+            Neighbour position = (Neighbour) neighbour.get(0);
+            switch (position) {
+                case UNDER:
+                    vertical.add((Tile) neighbour.get(1));
+                    nextY = y+2;
+                    while (getTile(x, nextY) instanceof Tile) {
+                        vertical.add(getTile(x, nextY));
+                        nextY++;
+                    }
+                    break;
+                case UPPER:
+                    vertical.add((Tile) neighbour.get(1));
+                    nextY = y-2;
+                    while (getTile(x, nextY) instanceof Tile) {
+                        vertical.add(getTile(x, nextY));
+                        nextY--;
+                    }
+                    break;
+                case RIGHT:
+                    horizontal.add((Tile) neighbour.get(1));
+                    nextX = x+2;
+                    while (getTile(nextX, y) instanceof Tile) {
+                        horizontal.add(getTile(nextX, y));
+                        nextX++;
+                    }
+                    break;
+                case LEFT:
+                    horizontal.add((Tile) neighbour.get(1));
+                    nextX = x-2;
+                    while (getTile(nextX, y) instanceof Tile) {
+                        horizontal.add(getTile(nextX, y));
+                        nextX--;
+                    }
+                default:
+                    break;
+            }
+        }
+
+        series.add(horizontal);
+        series.add(vertical);
+
+        return series;
+    }
 
     protected List<List<Object>> getNeighbourTiles(int x, int y) {
         List<List<Object>> neighbours = new ArrayList<>();
@@ -222,6 +354,8 @@ public class Board {
             ArrayList<Object> neighbour = new ArrayList<>();
             neighbour.add(position);
             neighbour.add((Tile) getTile(x, y));
+            neighbour.add(x);
+            neighbour.add(y);
             return neighbour;
         }
         return null;

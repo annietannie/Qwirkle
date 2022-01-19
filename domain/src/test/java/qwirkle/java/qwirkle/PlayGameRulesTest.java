@@ -30,7 +30,6 @@ public class PlayGameRulesTest {
         player1.playTile(0, 1, 1);
         player1.confirmTurn();
         Tile startTile = player2.getTile(1);
-
         player2.playTile(1, 2, 2);
 
         assertEquals(null, board.getTile(2,2));
@@ -50,4 +49,53 @@ public class PlayGameRulesTest {
         assertEquals(startTile.getShape(), player1.getTile(5).getShape());
     }
 
+    @Test
+    public void a_third_tile_with_a_wrong_colour_cant_be_placed() {
+        player1.playTile(0, 1, 1);
+        player1.playTile(3, 1, 2);
+        Tile startTile = player1.getTile(4);
+        player1.playTile(4, 1, 3);
+
+        assertEquals(null, board.getTile(1,3));
+        assertEquals(startTile.getColour(), player1.getTile(4).getColour());
+        assertEquals(startTile.getShape(), player1.getTile(4).getShape());
+    } 
+ 
+    @Test
+    public void a_third_tile_with_a_wrong_shape_cant_be_placed() {
+        player1.playTile(0, 1, 1);
+        player1.playTile(1, 1, 2);
+        Tile startTile = player1.getTile(4);
+        player1.playTile(4, 1, 3);
+
+        assertEquals(null, board.getTile(1,3));
+        assertEquals(startTile.getColour(), player1.getTile(4).getColour());
+        assertEquals(startTile.getShape(), player1.getTile(4).getShape());
+    } 
+
+    @Test
+    public void a_third_tile_that_is_exactly_the_same_as_the_first_cant_be_placed_with_same_colour() {
+        player1.playTile(0, 1, 1);
+        player1.playTile(3, 1, 2);
+        player1.confirmTurn();
+        Tile startTile = player2.getTile(4);
+        player2.playTile(4, 1, 3);
+
+        assertEquals(null, board.getTile(1,3));
+        assertEquals(startTile.getColour(), player2.getTile(4).getColour());
+        assertEquals(startTile.getShape(), player2.getTile(4).getShape());
+    } 
+
+    @Test
+    public void a_third_tile_that_is_exactly_the_same_as_the_first_cant_be_placed_with_same_shape() {
+        player1.playTile(0, 1, 1);
+        player1.playTile(1, 1, 2);
+        player1.confirmTurn();
+        Tile startTile = player2.getTile(4);
+        player2.playTile(4, 1, 3);
+
+        assertEquals(null, board.getTile(1,3));
+        assertEquals(startTile.getColour(), player2.getTile(4).getColour());
+        assertEquals(startTile.getShape(), player2.getTile(4).getShape());
+    } 
 }
