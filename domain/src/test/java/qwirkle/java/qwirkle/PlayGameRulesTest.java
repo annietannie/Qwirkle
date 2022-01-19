@@ -29,15 +29,25 @@ public class PlayGameRulesTest {
     public void a_tile_cant_be_placed_if_it_isnt_adjacent_to_an_existing_tile() {
         player1.playTile(0, 1, 1);
         player1.confirmTurn();
-
-        //System.out.println("Adjacent to existing tiles: " + board.adjacentToExistingTiles(2,2) );
-
         Tile startTile = player2.getTile(1);
+
         player2.playTile(1, 2, 2);
+
         assertEquals(null, board.getTile(2,2));
         assertEquals(startTile.getColour(), player2.getTile(1).getColour());
         assertEquals(startTile.getShape(), player2.getTile(1).getShape());
-
-
     }
+
+    @Test
+    public void a_tile_can_only_be_added_to_a_series_if_it_is_in_line() {
+        player1.playTile(2, 1, 1);
+        player1.playTile(4, 1, 2);
+        Tile startTile = player1.getTile(5);
+        player1.playTile(5, 2, 2);
+
+        assertEquals(null, board.getTile(2,2));
+        assertEquals(startTile.getColour(), player1.getTile(5).getColour());
+        assertEquals(startTile.getShape(), player1.getTile(5).getShape());
+    }
+
 }

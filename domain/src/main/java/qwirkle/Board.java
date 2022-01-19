@@ -8,7 +8,6 @@ public class Board {
     protected List<List<Tile>> tileGrid;
     protected List<List<Tile>> tileGridTemp;
     protected List<List<Object>> tileSeries;
-    protected Boolean isFirstMove;
 
     /* Constructing the board */
     protected Board() {
@@ -20,20 +19,15 @@ public class Board {
             }
             tileGrid.add(row);
         }
-        this.isFirstMove = true;
     }
 
     /* Placing a tile */
     protected Boolean placeTile(Tile tile, int x, int y, int index) {
-        if (isFirstMove) {
-            this.isFirstMove = false;
-        } else {
-            if (overlapsTileInGrid(x, y) || !adjacentToExistingTiles(x, y)) {
-            return false;
-            }
-        }
+        // check if move is valid
+        if (!placementIsValid(x, y)) { return false; }
 
-        if (tileSeries == null) {
+        // Handle move
+        if (isFirstTileInLine()) {
             tileSeries = new ArrayList<>();
             createTemporaryGridCopy();
         }
@@ -111,37 +105,126 @@ public class Board {
     }
 
     /* Checks for placing a tile */
+    protected Boolean placementIsValid(int x, int y) {
+        if (!isFirstMove()) {
+            if (isFirstTileInLine()) {
+                if (!adjacentToExistingTiles(x, y)) 
+                { return false; }
+            }
+            if (
+                overlapsTileInGrid(x, y) 
+                || !isInLineWithSeries(x, y)) 
+            { return false; }
+        }
+        return true;
+    }
+
+
+    protected Boolean isFirstMove() {
+        if (tileGrid.size() == 3 && tileGrid.get(0).size() == 3) {
+            for (List<Tile> tileRow : tileGrid) {
+                for (Tile tile : tileRow) {
+                    if (tile instanceof Tile) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    protected Boolean isFirstTileInLine() {
+        return tileSeries == null;
+    }
 
     protected Boolean overlapsTileInGrid(int x, int y) {
         return tileGrid.get(y).get(x) instanceof Tile;
     }
 
     protected Boolean adjacentToExistingTiles(int x, int y) {
-        List<Object> neighbours = new ArrayList<>();
-        if (y != 0) {
-            Object upperNeighbour = tileGrid.get(y-1).get(x);
-            System.out.println("I have an upper neighbour");
-        }
-        if (y != tileGrid.size()-1) {
-            Object underNeighbour = tileGrid.get(y+1).get(x);
-            System.out.println("I have an under neighbour");
-        }
-        if (x != 0) {
-            Object leftNeighbour = tileGrid.get(y).get(x-1);
-            System.out.println("I have a left neighbour");
-        }
-        if (x != tileGrid.get(0).size()-1) {
-            Object rightNeighbour = tileGrid.get(y).get(x+1);
-            System.out.println("I have a right neighbour");
-        }
+        return getNeighbourTiles(x,y).size() > 0;
+    }
 
-        for (Object neighbour : neighbours) {
-            if (neighbour instanceof Tile) {
+    protected Boolean isInLineWithSeries(int x, int y) {
+        if (tileSeries.size() > 1) {
+            if (tileSeries.get(0).get(1) == tileSeries.get(1).get(1)) {
+                // Vertically aligned
+                int xCoord = (int) tileSeries.get(0).get(1);
+                return xCoord == x;
+            } else if ((int) tileSeries.get(0).get(2) == (int) tileSeries.get(1).get(2)) {
+                // Horizontally aligned
+                int yCoord = (int) tileSeries.get(0).get(2);
+                return yCoord == y;
+            }
+        } else {
+            if ((int) tileSeries.get(0).get(1) == x || (int) tileSeries.get(0).get(2) == y) {
                 return true;
             }
         }
-
         return false;
+    }
+
+    /* protected Boolean fitsInSeries(int x, int y, Tile tile) {
+
+    } */
+
+    protected List<List<Object>> getNeighbourTiles(int x, int y) {
+        List<List<Object>> neighbours = new ArrayList<>();
+        List<List<Object>> neighbourInstructions = new ArrayList<>();
+        
+        if (y != tileGrid.size()-1) {
+            List<Object> neighbourInstructionUnder = new ArrayList<>();
+            neighbourInstructionUnder.add(x);
+            neighbourInstructionUnder.add(y+1);
+            neighbourInstructionUnder.add(Neighbour.UNDER);
+            neighbourInstructions.add(neighbourInstructionUnder);
+        }
+
+        if (y != 0) {
+            List<Object> neighbourInstructionUpper = new ArrayList<>();
+            neighbourInstructionUpper.add(x);
+            neighbourInstructionUpper.add(y-1);
+            neighbourInstructionUpper.add(Neighbour.UPPER);
+            neighbourInstructions.add(neighbourInstructionUpper);
+        }
+
+        if (x != 0) {
+            List<Object> neighbourInstructionLeft = new ArrayList<>();
+            neighbourInstructionLeft.add(x-1);
+            neighbourInstructionLeft.add(y);
+            neighbourInstructionLeft.add(Neighbour.LEFT);
+            neighbourInstructions.add(neighbourInstructionLeft);
+        }
+
+        if (x != tileGrid.get(0).size()-1) {
+            List<Object> neighbourInstructionRight = new ArrayList<>();
+            neighbourInstructionRight.add(x+1);
+            neighbourInstructionRight.add(y);
+            neighbourInstructionRight.add(Neighbour.RIGHT);
+            neighbourInstructions.add(neighbourInstructionRight);
+        }
+
+        for (List<Object> neighbourInstruction : neighbourInstructions ) {
+            if (getNeighbour(neighbourInstruction) != null) {
+                neighbours.add(getNeighbour(neighbourInstruction));
+            }
+        }
+
+        return neighbours;
+    }
+
+    protected List<Object> getNeighbour(List<Object> instructions) {
+        int x = (int) instructions.get(0);
+        int y = (int) instructions.get(1);
+        Neighbour position = (Neighbour) instructions.get(2);
+        if (getTile(x, y) != null) {
+            ArrayList<Object> neighbour = new ArrayList<>();
+            neighbour.add(position);
+            neighbour.add((Tile) getTile(x, y));
+            return neighbour;
+        }
+        return null;
     }
 
     /* Getters */

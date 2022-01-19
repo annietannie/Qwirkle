@@ -116,9 +116,10 @@ public class PlayGameTest {
     @Test
     public void Placing_2_tiles_from_player1_results_in_larger_grid_up() {
         player1.playTile(0, 1,1);
-        player1.playTile(1, 1,0);
-
-        System.out.println("Adjacent to existing tiles: " + board.adjacentToExistingTiles(1,0) );
+        player1.playTile(1, 1,2);
+        
+        assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
+        assertEquals(Shape.DIAMOND, board.getTile(1,1).getShape());
 
         int boardSizeY = board.getTileGrid().size();
         int boardSizeX = board.getTileGrid().get(0).size();
@@ -178,7 +179,6 @@ public class PlayGameTest {
         assertEquals(Shape.DIAMOND, player1.getTile(0).getShape());
         assertEquals(Colour.PURPLE, player1.getTile(1).getColour());
         assertEquals(Shape.SQUARE, player1.getTile(1).getShape());
-
 
         assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
         assertEquals(Shape.DIAMOND, board.getTile(1,1).getShape());
