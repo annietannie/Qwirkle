@@ -27,7 +27,7 @@ public class PlayGameTest {
 
     @Test
     public void Placing_tile_0_from_player_1_results_in_that_tile_on_1_1_of_the_grid_and_gone_from_players_hand() {
-        player1.playTile(0, 1,1);
+        player1.playTile(0, 1, 1);
         assertEquals(null, player1.getTile(0));
         assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
         assertEquals(Shape.DIAMOND, board.getTile(1,1).getShape());
@@ -49,7 +49,7 @@ public class PlayGameTest {
     @Test
     public void Placing_and_confirming_tile_0_from_player_1_results_in_that_tile_on_1_1_of_the_grid_and_new_tile_in_players_hand() {
         player1.playTile(0, 1,1);
-        player1.confirmMove();
+        player1.confirmTurn();
         // For test purposes only
         /*Tile newTile = player1.getTile(0);
         System.out.println(newTile.getColour() + " " + newTile.getShape());*/
@@ -67,7 +67,7 @@ public class PlayGameTest {
     @Test
     public void Player2_cancelling_move_player1_does_not_have_any_effect() {
         player1.playTile(0, 1,1);
-        player2.cancelMove();
+        player2.cancelTurn();
 
         assertEquals(null, player1.getTile(0));
         assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
@@ -79,7 +79,7 @@ public class PlayGameTest {
     @Test
     public void Placing_tile_and_cancelling_move_results_in_no_stone_in_1_1_on_grid_and_yellow_diamond_in_0_in_player1_hand() {
         player1.playTile(0, 1,1);
-        player1.cancelMove();
+        player1.cancelTurn();
         assertEquals(null, board.getTile(1,1));
         assertEquals(Colour.YELLOW, player1.getTile(0).getColour());
         assertEquals(Shape.DIAMOND, player1.getTile(0).getShape());
@@ -153,7 +153,7 @@ public class PlayGameTest {
     public void Placing_and_cancelling_move_2_tiles_from_player1_results_not_in_larger_grid() {
         player1.playTile(0, 1,1);
         player1.playTile(1, 2,1);
-        player1.cancelMove();
+        player1.cancelTurn();
 
         int boardSizeY = board.getTileGrid().size();
         int boardSizeX = board.getTileGrid().get(0).size();
@@ -166,7 +166,7 @@ public class PlayGameTest {
     public void Placing_and_confirming_2_tiles_from_player_1_results_in_those_tiles_on_the_grid_and_new_tiles_in_players_hand() {
         player1.playTile(0, 1,1);
         player1.playTile(1, 1,2);
-        player1.confirmMove();
+        player1.confirmTurn();
 
         /*// For test purposes only
         Tile newTile2 = player1.getTile(1);
@@ -191,7 +191,9 @@ public class PlayGameTest {
     public void Player1_changes_tiles_1_and_3_and_gets_new_stones() {
         player1.changeTile(0);
         player1.changeTile(2);
-        player1.confirmChanging();
+        player1.confirmTurn();
+
+        System.out.println(player1.changingTiles);
 
         assertEquals(Colour.RED, player1.getTile(0).getColour());
         assertEquals(Shape.DIAMOND, player1.getTile(0).getShape());
@@ -206,7 +208,7 @@ public class PlayGameTest {
     public void Player1_cancels_tile_change_and_nothing_happens() {
         player1.changeTile(0);
         player1.changeTile(2);
-        player1.cancelChanging();
+        player1.cancelTurn();
 
         assertEquals(Colour.YELLOW, player1.getTile(0).getColour());
         assertEquals(Shape.DIAMOND, player1.getTile(0).getShape());
@@ -228,7 +230,7 @@ public class PlayGameTest {
     @Test
     public void player2_placing_stone_on_another_results_in_first_stone_on_that_place() {
         player1.playTile(0, 1,1);
-        player1.confirmMove();
+        player1.confirmTurn();
         player2.playTile(1, 1,1);
 
         assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
@@ -248,5 +250,30 @@ public class PlayGameTest {
         assertEquals(Colour.PURPLE, player1.getTile(1).getColour());
         assertEquals(Shape.DIAMOND, player1.getTile(1).getShape());
 
+    }
+
+    @Test
+    public void after_placing_2_tiles_there_are_2_less_tiles_in_the_tilebag() {
+        int startingTilesInBag = player1.getTileBag().getNumberOfTiles();
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+        int endingTilesInBag = player1.getTileBag().getNumberOfTiles();
+        
+        assertEquals(startingTilesInBag - 2, endingTilesInBag);
+    }
+
+    @Test
+    public void twe_times_canceling_after_placing_a_tile_results_in_no_changes() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.cancelTurn();
+        player1.cancelTurn();
+
+        int boardSizeY = board.getTileGrid().size();
+        int boardSizeX = board.getTileGrid().get(0).size();
+
+        assertEquals(3, boardSizeX);
+        assertEquals(3, boardSizeY);
     }
 }

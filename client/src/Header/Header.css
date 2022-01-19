@@ -4,6 +4,7 @@ header {
 
 .main-header {
     color: rgb(224,0,24);
+    background-color: white;
     font-size: 2rem;
     margin-bottom: 8px;
     position: sticky;

@@ -46,7 +46,7 @@ public class Board {
     }
 
     protected void confirmMove() {
-        this.tileSeries.clear();
+        this.tileSeries = null;
         tileGridTemp.clear();
     }
 
@@ -58,7 +58,7 @@ public class Board {
             tileGrid = new ArrayList<>();
             tileGrid.addAll(tileGridTemp);
             tileGridTemp.clear();
-            this.tileSeries.clear();
+            this.tileSeries = null;
             return resetList;
         }
         return null;
@@ -80,13 +80,13 @@ public class Board {
             for (List<Tile> row : tileGrid) {
                 row.add(0,null);
             }
-        } else if (x == tileGrid.get(0).size()-1) {
+        } if (x == tileGrid.get(0).size()-1) {
             for (List<Tile> row : tileGrid) {
                 row.add(null);
             }
-        } else if (y == 0) {
+        } if (y == 0) {
             tileGrid.add(0, emtpyRow());
-        } else if (y == tileGrid.size()-1) {
+        } if (y == tileGrid.size()-1) {
             tileGrid.add(emtpyRow());
         }
     }
