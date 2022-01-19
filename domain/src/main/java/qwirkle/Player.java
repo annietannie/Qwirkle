@@ -125,7 +125,7 @@ public class Player {
     public void cancelChanging() {
         for (List<Object> resetTile : changingTiles) {
             Tile tile = (Tile) resetTile.get(0);
-            int index = (int) resetTile.get(3);
+            int index = (int) resetTile.get(1);
             setTile(tile, index);
         }
         changingTiles = null;

@@ -187,7 +187,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
     return (
     <div className="QwirkleBoard">
 
-        <h2>{ yourTurn ? `Your turn!` : `Not your turn`} </h2>
+        <h1>{ yourTurn ? `Your turn!` : `Not your turn`} </h1>
 
         <div className="gameBoard">
         {board.map((tileRow, i) => {
