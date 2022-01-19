@@ -118,6 +118,8 @@ public class PlayGameTest {
         player1.playTile(0, 1,1);
         player1.playTile(1, 1,0);
 
+        System.out.println("Adjacent to existing tiles: " + board.adjacentToExistingTiles(1,0) );
+
         int boardSizeY = board.getTileGrid().size();
         int boardSizeX = board.getTileGrid().get(0).size();
 

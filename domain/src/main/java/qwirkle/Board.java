@@ -8,7 +8,9 @@ public class Board {
     protected List<List<Tile>> tileGrid;
     protected List<List<Tile>> tileGridTemp;
     protected List<List<Object>> tileSeries;
+    protected Boolean isFirstMove;
 
+    /* Constructing the board */
     protected Board() {
         this.tileGrid = new ArrayList<>();
         for (int y=0; y<3; y++) {
@@ -18,12 +20,17 @@ public class Board {
             }
             tileGrid.add(row);
         }
+        this.isFirstMove = true;
     }
 
+    /* Placing a tile */
     protected Boolean placeTile(Tile tile, int x, int y, int index) {
-        if (overlapsTileInGrid(x, y) ) {
-            //|| overlapsTileInSeries(x, y)
+        if (isFirstMove) {
+            this.isFirstMove = false;
+        } else {
+            if (overlapsTileInGrid(x, y) || !adjacentToExistingTiles(x, y)) {
             return false;
+            }
         }
 
         if (tileSeries == null) {
@@ -45,11 +52,13 @@ public class Board {
         return true;
     }
 
+    /* Confirming a move */
     protected void confirmMove() {
         this.tileSeries = null;
         tileGridTemp.clear();
     }
 
+    /* Cancelling a move */
     protected List<List<Object>> cancelMove() {
         if (tileSeries != null) {
             List<List<Object>> resetList = new ArrayList<>();
@@ -64,6 +73,7 @@ public class Board {
         return null;
     }
 
+    /* Making a copy of the old grid in case a move is cancelled */
     protected void createTemporaryGridCopy() {
         tileGridTemp = new ArrayList<>();
         for (List<Tile> gridRow : tileGrid) {
@@ -75,6 +85,7 @@ public class Board {
         }
     }
 
+    /* Extending the grid when a tile is placed on a side */
     protected void gridExtension(int x, int y) {
         if (x == 0) {
             for (List<Tile> row : tileGrid) {
@@ -99,22 +110,41 @@ public class Board {
         return emptyRow;
     }
 
+    /* Checks for placing a tile */
+
     protected Boolean overlapsTileInGrid(int x, int y) {
         return tileGrid.get(y).get(x) instanceof Tile;
     }
 
-    protected Boolean adjacentToAtLeastOneExistingTileInGrid(int x, int y) {
-        Object upperNeighbour = tileGrid.get(y-1).get(x);
-        Object underNeighbour = tileGrid.get(y+1).get(x);
-        Object leftNeighbour = tileGrid.get(y).get(x-1);
-        Object rightNeighbour = tileGrid.get(y).get(x+1);
+    protected Boolean adjacentToExistingTiles(int x, int y) {
+        List<Object> neighbours = new ArrayList<>();
+        if (y != 0) {
+            Object upperNeighbour = tileGrid.get(y-1).get(x);
+            System.out.println("I have an upper neighbour");
+        }
+        if (y != tileGrid.size()-1) {
+            Object underNeighbour = tileGrid.get(y+1).get(x);
+            System.out.println("I have an under neighbour");
+        }
+        if (x != 0) {
+            Object leftNeighbour = tileGrid.get(y).get(x-1);
+            System.out.println("I have a left neighbour");
+        }
+        if (x != tileGrid.get(0).size()-1) {
+            Object rightNeighbour = tileGrid.get(y).get(x+1);
+            System.out.println("I have a right neighbour");
+        }
 
-        return (upperNeighbour instanceof Tile
-            || underNeighbour instanceof Tile
-            || leftNeighbour instanceof Tile
-            || rightNeighbour instanceof Tile);
+        for (Object neighbour : neighbours) {
+            if (neighbour instanceof Tile) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    /* Getters */
     public List<List<Tile>> getTileGrid() {
         return tileGrid;
     }

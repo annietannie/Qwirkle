@@ -11,38 +11,6 @@ type PlayProps = {
     setGameState(newGameState: GameState): void;
 }
 
-function Counter() {
-    const [count, setCount] = useState(0);
-
-    const addOne = async () => {
-        const response = await fetch('qwirkle/api/addone', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ count: count })
-        });
-
-
-        if (response.ok) {
-            const countState = await response.json();
-            setCount(countState.count);
-        }
-        
-    }
-
-    return (
-        <div>
-            <p>You clicked {count} times</p>
-            <button 
-                type="button"
-                onClick={addOne}
-            >+ 1</button>
-        </div>
-    )
-}
-
 export function Play({ gameState, setGameState}: PlayProps) {
     const handPlayer1 = gameState.players[0].tiles;
     const board = gameState.gameBoard.tiles;
@@ -279,7 +247,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
         <button type="button" className="restart" onClick={() => restart()}>Restart</button>
         
-        <Counter />        
     </div>
     )
 }
