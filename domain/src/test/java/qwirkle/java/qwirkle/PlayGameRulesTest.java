@@ -168,4 +168,18 @@ public class PlayGameRulesTest {
         assertEquals(2, player1.getScore());     
         assertEquals(6, player2.getScore());
     }
+
+    @Test
+    public void placing_tiles_should_be_adjacent_to_series() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+        player2.playTile(1, 0,2);
+        Tile startTile = player2.getTile(2);
+        player2.playTile(2, 3,2);
+
+        assertEquals(null, board.getTile(2,3));
+        assertEquals(startTile.getColour(), player2.getTile(2).getColour());
+        assertEquals(startTile.getShape(), player2.getTile(2).getShape());
+    }
 }

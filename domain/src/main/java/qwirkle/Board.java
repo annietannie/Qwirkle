@@ -192,7 +192,9 @@ public class Board {
             if (isFirstTileInLine()) {
                 if (!adjacentToExistingTiles(x, y)) 
                 { return false; }
-            } else if (!isInLineWithSeries(x, y))
+            } else if (
+                !isInLineWithSeries(x, y)
+                || !adjacentWithSeries(x, y))
             { return false; }
             if (
                 overlapsTileInGrid(x, y)
@@ -246,6 +248,18 @@ public class Board {
             if ((int) tileSeries.get(0).get(1) == x || (int) tileSeries.get(0).get(2) == y) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    protected Boolean adjacentWithSeries(int x, int y) {
+        for (List<Object> tile : tileSeries) {
+            int xTile = (int) tile.get(1);
+            int yTile = (int) tile.get(2);
+            if ((x == xTile + 1 ||  x == xTile - 1)
+                ^ (y == yTile + 1 || y == yTile - 1)) 
+                { return true;
+            } 
         }
         return false;
     }
