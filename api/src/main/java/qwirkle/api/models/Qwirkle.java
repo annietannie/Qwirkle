@@ -4,6 +4,7 @@ public class Qwirkle {
     Player[] players;
     Board gameBoard;
     int numberOfTilesLeft;
+    Boolean isGameOver;
 
     public Qwirkle(qwirkle.Qwirkle qwirkle, int numberOfPlayers) {
         this.players = new Player[numberOfPlayers];
@@ -16,6 +17,7 @@ public class Qwirkle {
         this.gameBoard = new Board(qwirkle, xLength, yLength);
 
         this.numberOfTilesLeft = qwirkle.getNumberOfTilesLeft();
+        this.isGameOver = qwirkle.isEndOfGame();
     }
 
     public Player[] getPlayers() { return players; }

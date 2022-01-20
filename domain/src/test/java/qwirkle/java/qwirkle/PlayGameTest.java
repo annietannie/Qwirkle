@@ -234,6 +234,7 @@ public class PlayGameTest {
         player1.playTile(0, 1,1);
         player1.confirmTurn();
         player2.playTile(1, 1,1);
+        player2.confirmTurn();
 
         assertEquals(Colour.YELLOW, board.getTile(1,1).getColour());
         assertEquals(Shape.DIAMOND, board.getTile(1,1).getShape());
@@ -266,7 +267,7 @@ public class PlayGameTest {
     }
 
     @Test
-    public void twe_times_canceling_after_placing_a_tile_results_in_no_changes() {
+    public void two_times_canceling_after_placing_a_tile_results_in_no_changes() {
         player1.playTile(0, 1,1);
         player1.playTile(1, 1,2);
         player1.cancelTurn();
@@ -277,5 +278,17 @@ public class PlayGameTest {
 
         assertEquals(3, boardSizeX);
         assertEquals(3, boardSizeY);
+    }
+
+    @Test
+    public void two_turns_after_eachother_doesnt_give_problems() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+        player2.playTile(1, 1,3);
+        player2.confirmTurn();
+
+        assertEquals(Colour.BLUE, board.getTile(1,3).getColour());
+        assertEquals(Shape.DIAMOND, board.getTile(1,3).getShape());
     }
 }

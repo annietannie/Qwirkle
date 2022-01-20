@@ -2,11 +2,13 @@ export interface GameState {
     players: Player[];
     gameBoard: Board;
     numberOfTilesLeft: number;
+    isGameOver: boolean;
 }
 
 interface Player {
     tiles: Tile[];
     hasTurn: boolean;
+    score: number;
 }
 
 interface Board {

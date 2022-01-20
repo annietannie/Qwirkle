@@ -90,12 +90,18 @@ public class QwirkleImpl implements Qwirkle {
         players.get(player).changeTile(index);
     }
 
-    /* @Override
+    @Override
     public boolean isEndOfGame() {
-        boolean isGameIsOver = false;
         for (Player player : players) {
-            isGameIsOver = player.isGameOver() ? true;
+            if (player.isGameOver()) {
+                return true;
+            }
         }
-        return isGameOver;
-    } */
+        return false;
+    }
+
+    @Override
+    public int getScore(int player) {
+        return players.get(player).getScore();
+    }
 }

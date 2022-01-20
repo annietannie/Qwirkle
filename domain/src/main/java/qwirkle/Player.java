@@ -11,6 +11,7 @@ public class Player {
     protected List<Tile> tiles;
     protected Board board;
     protected List<List<Object>> changingTiles;
+    protected int score;
 
     public Player(int numberOfPlayers) {
         this(numberOfPlayers, new Random());
@@ -33,6 +34,7 @@ public class Player {
 
     protected void setupPlayer(int numberOfPlayers, TileBag tileBag, Board board, Player firstPlayer) {
         this.tiles = new ArrayList<>(6);
+        this.score = 0;
 
         // Create hand and grab 6 tiles
         for (int i=0; i<6; i++) {
@@ -75,7 +77,7 @@ public class Player {
     public void confirmTurn() {
         if (myTurn) {
             if (board.doesMoveExist()) {
-                confirmMove();
+                this.score += confirmMove();
             } if (changingTiles != null) {
                 confirmChanging();
             }
@@ -92,13 +94,13 @@ public class Player {
         }
     }
 
-    public void confirmMove() {
-        board.confirmMove();
+    public int confirmMove() {
         for (int i=0; i<6; i++) {
             if (tiles.get(i) == null) {
                 grabTile(i);
             }
         }
+        return board.confirmMove();
     }
 
     public void cancelTurn() {
@@ -162,6 +164,7 @@ public class Player {
     }
 
     protected void endOfGame() {
+        this.score += 6;
         setMyTurn(false);
     }
 
@@ -199,5 +202,9 @@ public class Player {
 
     public Board getBoard() {
         return board;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

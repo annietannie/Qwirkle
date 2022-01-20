@@ -1,7 +1,8 @@
 import React from "react"
 
 export function HowToPlay() {
-    return <div className="Text">
+    return <div className="wrapper">
+    <div className="Text">
         <h1>How to play</h1>
         <h3>Setup and starting the game</h3>
         <p>
@@ -39,5 +40,6 @@ export function HowToPlay() {
         <p>
             When there are no more tiles to draw, play continues as before, but players do not replenish their hands at the end of their turn. The first player who uses all of their tiles ends the game and gets a six-point bonus. The player with the highest score wins.
         </p>
-    </div>
+        </div>
+        </div>
 }
