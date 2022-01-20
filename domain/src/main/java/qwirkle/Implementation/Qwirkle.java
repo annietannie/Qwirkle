@@ -36,4 +36,8 @@ public interface Qwirkle {
 
 	void tradeTile(int player, int index);
 
+	boolean isEndOfGame();
+
+	int getScore(int player);
+
 }

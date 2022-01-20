@@ -36,11 +36,11 @@ export function Play({ gameState, setGameState}: PlayProps) {
                     body: JSON.stringify({ player, selectedTile, x, y })
                 });
                 
-                console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
+                //console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
 
                 if (response.ok) {
                     const gameState = await response.json();
-                    console.log(gameState);
+                    //console.log(gameState);
                         if ("players" in gameState) {
                             localStorage.setItem("gameState", JSON.stringify(gameState));
                             setGameState(gameState);
@@ -70,9 +70,9 @@ export function Play({ gameState, setGameState}: PlayProps) {
                 });
 
                 if (response.ok) {
-                    console.log("let's trade tile " + selectedTile);
+                    //console.log("let's trade tile " + selectedTile);
                     const gameState = await response.json();
-                    console.log(gameState);
+                    //console.log(gameState);
                         if ("players" in gameState) {
                             localStorage.setItem("gameState", JSON.stringify(gameState));
                             setGameState(gameState);
@@ -108,7 +108,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
             if (response.ok) {
                 const gameState = await response.json();
-                console.log(gameState);
+                //console.log(gameState);
                     if ("players" in gameState) {
                         localStorage.setItem("gameState", JSON.stringify(gameState));
                         setGameState(gameState);
@@ -137,7 +137,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
             if (response.ok) {
                 const gameState = await response.json();
-                console.log(gameState);
+                //console.log(gameState);
                     if ("players" in gameState) {
                         localStorage.setItem("gameState", JSON.stringify(gameState));
                         setGameState(gameState);
@@ -156,6 +156,8 @@ export function Play({ gameState, setGameState}: PlayProps) {
     <div className="QwirkleBoard">
 
         <h1>{ yourTurn ? `Your turn!` : `Not your turn`} </h1>
+        <h1>{gameState.isGameOver ? `The game is over` : ``} </h1>
+        <h2>Your score: {gameState.players[0].score}</h2>
 
         <div className="gameBoard">
         {board.map((tileRow, i) => {
@@ -246,7 +248,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
         </div>
 
         <button type="button" className="restart" onClick={() => restart()}>Restart</button>
-        
-    </div>
+        </div>
     )
 }

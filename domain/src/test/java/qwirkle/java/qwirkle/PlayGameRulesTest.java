@@ -98,4 +98,74 @@ public class PlayGameRulesTest {
         assertEquals(startTile.getColour(), player2.getTile(4).getColour());
         assertEquals(startTile.getShape(), player2.getTile(4).getShape());
     } 
+
+    @Test
+    public void Placing_and_confirming_2_tiles_from_player_1_results_in_player1_having_2_points_vertically() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+
+        assertEquals(2, player1.getScore());
+
+    }
+
+    @Test
+    public void Placing_and_confirming_2_tiles_from_player_1_results_in_player1_having_2_points_horizontally() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 2,1);
+        player1.confirmTurn();
+
+        assertEquals(2, player1.getScore());
+    }
+
+    @Test
+    public void playing_around_the_corner_upper_left() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+        player2.playTile(1, 1,0);
+        Tile tile = player2.getTile(0);
+        player2.playTile(0, 2,1);
+        player2.confirmTurn();
+
+        assertEquals(Colour.BLUE, board.getTile(2,1).getColour());
+        assertEquals(Shape.SQUARE, board.getTile(2,1).getShape());  
+        assertEquals(2, player1.getScore());    
+        assertEquals(5, player2.getScore());
+    }
+
+    @Test
+    public void playing_around_the_corner_lower_left() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 2,1);
+        player1.confirmTurn();
+        player2.playTile(1, 0,1);
+        Tile tile = player2.getTile(0);
+        player2.playTile(0, 1,0);
+        player2.confirmTurn();
+
+        assertEquals(Colour.BLUE, board.getTile(1,1).getColour());
+        assertEquals(Shape.SQUARE, board.getTile(1,1).getShape());
+        assertEquals(2, player1.getScore());     
+        assertEquals(5, player2.getScore());
+    }
+
+    @Test
+    public void making_a_T_shape_doesnt_give_issues() {
+        player1.playTile(0, 1,1);
+        player1.playTile(1, 1,2);
+        player1.confirmTurn();
+        player2.playTile(1, 1,0);
+        player2.playTile(2, 2,1);
+        player2.playTile(5, 0,1);
+
+        for (List<Object> tile : board.tileSeries) {
+            System.out.println("x: " + tile.get(1) + " y: " + tile.get(2));
+        }
+        
+        player2.confirmTurn();
+
+        assertEquals(2, player1.getScore());     
+        assertEquals(6, player2.getScore());
+    }
 }

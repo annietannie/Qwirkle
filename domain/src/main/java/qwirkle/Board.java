@@ -32,6 +32,19 @@ public class Board {
             createTemporaryGridCopy();
         }
 
+        System.out.println("New tile - x: " + x + " y: " + y);
+
+        gridExtension(x, y);
+        
+        if (x == 0) {
+            x++;
+        } else if (y == 0) {
+            y++;
+        }
+
+        System.out.println("New tile adjustment - x: " + x + " y: " + y);
+
+        // Adding tile to tileSeries
         ArrayList<Object> newTile = new ArrayList<>();
         newTile.add(tile);
         newTile.add(x);
@@ -39,17 +52,74 @@ public class Board {
         newTile.add(index);
         tileSeries.add(newTile);
 
+        // Adding tile to tileGrid
         tileGrid.get(y).set(x,tile);
-
-        gridExtension(x, y);
 
         return true;
     }
 
     /* Confirming a move */
-    protected void confirmMove() {
+    protected int confirmMove() {
+        System.out.println("I am in the board");
+        int score = calculateScore();
         this.tileSeries = null;
         tileGridTemp.clear();
+        return score;
+    }
+
+    /* Calculating the score */
+    protected int calculateScore() {
+
+        int score = 0;
+        
+        // horizontal or vertical
+        int x1 = (int) tileSeries.get(0).get(1);
+        int y1 = (int) tileSeries.get(0).get(2);
+        int x2;
+        int y2;
+
+        if (tileSeries.size() > 1) {
+            x2 = (int) tileSeries.get(1).get(1);
+            y2 = (int) tileSeries.get(1).get(2);
+        } else {
+            x2 = x1;
+            y2 = y1;
+        }
+
+        //System.out.println("x1: " + x1 + " y1: " + y1);
+        //System.out.println("x2: " + x2 + " y2: " + y2);
+
+        if (x1 == x2) {
+            // vertical or only 1
+            List<Tile> verticalSerie = getSeries(x1, y1).get(1);
+            // Check for qwirkle
+            score = verticalSerie.size() == 5 ? 12 : verticalSerie.size()+1;
+
+            for (List<Object> tile : tileSeries) {
+                List<Tile> horizontalSerie = getSeries((int) tile.get(1), (int) tile.get(2)).get(0);
+                // Check for qwirkle
+                if (horizontalSerie.size() > 0) {
+                    score += horizontalSerie.size() == 5 ? 12 : horizontalSerie.size()+1;
+                }
+            }
+
+        } else if (y1 == y2) {
+            // horizontal
+            List<Tile> horizontalSerie = getSeries(x1, y1).get(0);
+            System.out.println("I've got the list");
+            // Check for qwirkle
+            score = horizontalSerie.size() == 5 ? 12 : horizontalSerie.size()+1;
+        
+
+            for (List<Object> tile : tileSeries) {
+                List<Tile> verticalSerie = getSeries((int) tile.get(1), (int) tile.get(2)).get(1);
+                // Check for qwirkle
+                if (verticalSerie.size() > 0) {
+                    score += verticalSerie.size() == 5 ? 12 : verticalSerie.size()+1;
+                }
+            }
+        }
+        return score;
     }
 
     /* Cancelling a move */
@@ -85,12 +155,24 @@ public class Board {
             for (List<Tile> row : tileGrid) {
                 row.add(0,null);
             }
+            // Adjusting coordinates of tiles in tileSeries
+            for (List<Object> tileInSerie : tileSeries) {
+                int xCoord = (int) tileInSerie.get(1);
+                System.out.println("xCoord: " + xCoord);
+                tileInSerie.set(1, xCoord + 1);
+            }
         } if (x == tileGrid.get(0).size()-1) {
             for (List<Tile> row : tileGrid) {
                 row.add(null);
             }
         } if (y == 0) {
             tileGrid.add(0, emtpyRow());
+            // Adjusting coordinates of tiles in tileSeries
+            for (List<Object> tileInSerie : tileSeries) {
+                int yCoord = (int) tileInSerie.get(2);
+                System.out.println("yCoord: " + yCoord);
+                tileInSerie.set(2, yCoord + 1);
+            }
         } if (y == tileGrid.size()-1) {
             tileGrid.add(emtpyRow());
         }
@@ -159,6 +241,8 @@ public class Board {
                 return yCoord == y;
             }
         } else {
+            //System.out.println("Tile 1 x: " + (int) tileSeries.get(0).get(1) + " y: " + (int) tileSeries.get(0).get(2));
+            //System.out.println("New tile x: " + x + " y: " + y);
             if ((int) tileSeries.get(0).get(1) == x || (int) tileSeries.get(0).get(2) == y) {
                 return true;
             }
@@ -197,6 +281,7 @@ public class Board {
                 }
             }
         }
+
         return true;
     }
 

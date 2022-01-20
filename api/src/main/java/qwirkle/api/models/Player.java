@@ -3,10 +3,13 @@ package qwirkle.api.models;
 public class Player {
 
     boolean hasTurn;
+    int score;
     Tile[] tiles;
 
     public Player(qwirkle.Qwirkle qwirkle, int playerNumber) {
         this.hasTurn = qwirkle.isPlayersTurn(playerNumber);
+        this.score = qwirkle.getScore(playerNumber);
+
         this.tiles = new Tile[6];
         for (int i=0; i<6; i++) {
             if (qwirkle.isPlayerTileNull(playerNumber, i)) {
@@ -23,4 +26,6 @@ public class Player {
     public boolean getHasTurn() { return hasTurn; }
 
     public Tile[] getTiles() { return tiles; }
+
+    public int getScore() { return score; }
 }
