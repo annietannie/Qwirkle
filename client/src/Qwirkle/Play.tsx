@@ -17,6 +17,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
     var yourTurn: boolean = gameState.players[0].hasTurn;
     var selectedTile: number | null = null;
     var player: number = 0;
+    var colourMode: String = "Colour Blind";
 
     function selectTile(index: number) {
         if (handPlayer1[index] != null) {
@@ -145,6 +146,11 @@ export function Play({ gameState, setGameState}: PlayProps) {
         }
     }
 
+    function colourBlind() {
+        colourMode = "normal colour";
+        window.location.reload(false);
+    }
+
     // This function will be triggered when you start dragging
     function dragStartHandler (
         event: React.DragEvent<HTMLDivElement>,
@@ -181,13 +187,13 @@ export function Play({ gameState, setGameState}: PlayProps) {
                         {tileRow.map((tile, j) => {
                             if (tile == null) {
                                 return (
-                                <input 
+                                <div 
                                     className="tile emptyTile emptyGridTile"
                                     onDragOver={allowDrop}
                                     onDrop={dropHandler}
                                     key={j}
                                     onClick={() => placeTile(i, j)}
-                                ></input>
+                                ></div>
                                 )
                             } else {
                                 return (
@@ -264,7 +270,8 @@ export function Play({ gameState, setGameState}: PlayProps) {
             <div className="tilesLeft">{gameState.numberOfTilesLeft}</div>
         </div>
 
-        <button type="button" className="restart" onClick={() => restart()}>Restart</button>
+        <button type="button" id="restart" onClick={() => restart()}>Restart</button>
+        
         </div>
     )
 }

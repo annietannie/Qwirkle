@@ -88,7 +88,7 @@ public class Board {
             // vertical or only 1
             List<Tile> verticalSerie = getSeries(x1, y1).get(1);
             // Check for qwirkle
-            score = verticalSerie.size() == 5 ? 12 : verticalSerie.size()+1;
+            score = verticalSerie.size() == 5 ? 12 : (verticalSerie.size()+1);
 
             for (List<Object> tile : tileSeries) {
                 List<Tile> horizontalSerie = getSeries((int) tile.get(1), (int) tile.get(2)).get(0);
@@ -102,7 +102,7 @@ public class Board {
             // horizontal
             List<Tile> horizontalSerie = getSeries(x1, y1).get(0);
             // Check for qwirkle
-            score = horizontalSerie.size() == 5 ? 12 : horizontalSerie.size()+1;
+            score = horizontalSerie.size() == 5 ? 12 : (horizontalSerie.size()+1);
         
 
             for (List<Object> tile : tileSeries) {
@@ -188,7 +188,7 @@ public class Board {
                 { return false; }
             } else if (
                 !isInLineWithSeries(x, y)
-                || !adjacentWithSeries(x, y))
+                || !adjacentToSeries(x, y))
             { return false; }
             if (
                 overlapsTileInGrid(x, y)
@@ -246,7 +246,7 @@ public class Board {
         return false;
     }
 
-    protected Boolean adjacentWithSeries(int x, int y) {
+    protected Boolean adjacentToSeries(int x, int y) {
         for (List<Object> tile : tileSeries) {
             int xTile = (int) tile.get(1);
             int yTile = (int) tile.get(2);
