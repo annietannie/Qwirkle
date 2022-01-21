@@ -32,8 +32,6 @@ public class Board {
             createTemporaryGridCopy();
         }
 
-        System.out.println("New tile - x: " + x + " y: " + y);
-
         gridExtension(x, y);
         
         if (x == 0) {
@@ -41,8 +39,6 @@ public class Board {
         } else if (y == 0) {
             y++;
         }
-
-        System.out.println("New tile adjustment - x: " + x + " y: " + y);
 
         // Adding tile to tileSeries
         ArrayList<Object> newTile = new ArrayList<>();
@@ -60,7 +56,6 @@ public class Board {
 
     /* Confirming a move */
     protected int confirmMove() {
-        System.out.println("I am in the board");
         int score = calculateScore();
         this.tileSeries = null;
         tileGridTemp.clear();
@@ -106,7 +101,6 @@ public class Board {
         } else if (y1 == y2) {
             // horizontal
             List<Tile> horizontalSerie = getSeries(x1, y1).get(0);
-            System.out.println("I've got the list");
             // Check for qwirkle
             score = horizontalSerie.size() == 5 ? 12 : horizontalSerie.size()+1;
         
@@ -158,7 +152,7 @@ public class Board {
             // Adjusting coordinates of tiles in tileSeries
             for (List<Object> tileInSerie : tileSeries) {
                 int xCoord = (int) tileInSerie.get(1);
-                System.out.println("xCoord: " + xCoord);
+                //System.out.println("xCoord: " + xCoord);
                 tileInSerie.set(1, xCoord + 1);
             }
         } if (x == tileGrid.get(0).size()-1) {
@@ -170,7 +164,7 @@ public class Board {
             // Adjusting coordinates of tiles in tileSeries
             for (List<Object> tileInSerie : tileSeries) {
                 int yCoord = (int) tileInSerie.get(2);
-                System.out.println("yCoord: " + yCoord);
+                //System.out.println("yCoord: " + yCoord);
                 tileInSerie.set(2, yCoord + 1);
             }
         } if (y == tileGrid.size()-1) {

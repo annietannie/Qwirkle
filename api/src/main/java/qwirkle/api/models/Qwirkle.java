@@ -25,4 +25,6 @@ public class Qwirkle {
     public Board getGameBoard() { return gameBoard; }
 
     public int getNumberOfTilesLeft() { return numberOfTilesLeft; }
+
+    public Boolean getIsGameOver() { return isGameOver; }
 }
