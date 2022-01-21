@@ -36,11 +36,8 @@ export function Play({ gameState, setGameState}: PlayProps) {
                     body: JSON.stringify({ player, selectedTile, x, y })
                 });
                 
-                //console.log("Player: " + player + " index: " + selectedTile + " x: " + x + " y: " + y);
-
                 if (response.ok) {
                     const gameState = await response.json();
-                    //console.log(gameState);
                         if ("players" in gameState) {
                             localStorage.setItem("gameState", JSON.stringify(gameState));
                             setGameState(gameState);
@@ -70,9 +67,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                 });
 
                 if (response.ok) {
-                    //console.log("let's trade tile " + selectedTile);
                     const gameState = await response.json();
-                    //console.log(gameState);
                         if ("players" in gameState) {
                             localStorage.setItem("gameState", JSON.stringify(gameState));
                             setGameState(gameState);
@@ -108,7 +103,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
             if (response.ok) {
                 const gameState = await response.json();
-                //console.log(gameState);
                     if ("players" in gameState) {
                         localStorage.setItem("gameState", JSON.stringify(gameState));
                         setGameState(gameState);
@@ -137,7 +131,6 @@ export function Play({ gameState, setGameState}: PlayProps) {
 
             if (response.ok) {
                 const gameState = await response.json();
-                //console.log(gameState);
                     if ("players" in gameState) {
                         localStorage.setItem("gameState", JSON.stringify(gameState));
                         setGameState(gameState);
@@ -151,6 +144,27 @@ export function Play({ gameState, setGameState}: PlayProps) {
             console.error(error);
         }
     }
+
+    // This function will be triggered when you start dragging
+    function dragStartHandler (
+        event: React.DragEvent<HTMLDivElement>,
+        index: number) 
+        {
+        event.dataTransfer.setData("text", index.toString());
+    };
+
+    // This makes the third box become droppable
+    function allowDrop (event: React.DragEvent<HTMLDivElement>) {
+        event.preventDefault();
+    };
+
+    // This function will be triggered when dropping
+    function dropHandler (event: React.DragEvent<HTMLDivElement>) {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        placeTile()
+    }
+
 
     return (
     <div className="QwirkleBoard">
@@ -168,8 +182,9 @@ export function Play({ gameState, setGameState}: PlayProps) {
                             if (tile == null) {
                                 return (
                                 <button 
-                                    id="emptyGridTile" 
-                                    className="tile"
+                                    className="tile emptyTile emptyGridTile"
+                                    onDragOver={allowDrop}
+                                    onDrop={dropHandler}
                                     key={j}
                                     onClick={() => placeTile(i, j)}
                                 ></button>
@@ -180,7 +195,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                                     className="tile"
                                     key={j}
                                     draggable="false"
-                                    src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                                    src={"./SVG_Tiles/" + tile.shape + "_" +  tile.colour + ".SVG"}
                                 ></img>
                                 )
                             }
@@ -190,25 +205,26 @@ export function Play({ gameState, setGameState}: PlayProps) {
             })}
         </div>
 
+        <div id="tools">
         <div className="hand-player">
             {handPlayer1.map((tile, j) => {
                 if(tile == null) {
                     return (
                         <div
-                            id="emptyHandTile"
-                            className="tile"
+                            className="tile emptyTile emptyHandTile"
                             key={j}>
                         </div>
                     )
                 } else {
                     return (
                         <input
-                            id="handTile"
-                            className="tile"
-                            draggable="true"
+                            id={j.toString()}
+                            className="tile handTile"
+                            draggable={true}
+                            onDragStart={(event) => dragStartHandler(event, j)}
                             type="image"
                             key={j}
-                            src={"./Tiles/" + tile.shape + "_" +  tile.colour + ".png"}
+                            src={"./SVG_Tiles/" + tile.shape + "_" +  tile.colour + ".SVG"}
                             onClick={() => selectTile(j)}
                         ></input>
                     )
@@ -239,6 +255,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                     ></img>
                 </div>
             </div>
+        </div>
 
         <div className="bagContainer">
             <img
@@ -251,3 +268,5 @@ export function Play({ gameState, setGameState}: PlayProps) {
         </div>
     )
 }
+
+
