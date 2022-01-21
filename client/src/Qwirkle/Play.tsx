@@ -181,13 +181,13 @@ export function Play({ gameState, setGameState}: PlayProps) {
                         {tileRow.map((tile, j) => {
                             if (tile == null) {
                                 return (
-                                <button 
+                                <input 
                                     className="tile emptyTile emptyGridTile"
                                     onDragOver={allowDrop}
                                     onDrop={dropHandler}
                                     key={j}
                                     onClick={() => placeTile(i, j)}
-                                ></button>
+                                ></input>
                                 )
                             } else {
                                 return (

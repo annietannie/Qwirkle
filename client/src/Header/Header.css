@@ -10,6 +10,7 @@ header {
     position: sticky;
     top: 0;
     font-weight: 450;
+    z-index:9999
 }
 
 .main-title{ 

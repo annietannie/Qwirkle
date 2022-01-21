@@ -64,7 +64,7 @@ h1 {
     cursor: grab;
 }
 
-#handTile:focus {
+.handTile:focus {
     opacity: 40%;
 }
 
