@@ -6,8 +6,8 @@ body {
     background-image: url("QwirkleAchtergrond.png");
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center bottom;
+    background-size: cover;
+    background-position: center top;
 }
 
 h1 {
@@ -64,14 +64,16 @@ h1 {
     cursor: grab;
 }
 
-#handTile:focus {
+.handTile:focus {
     opacity: 40%;
 }
 
 .emptyTile {
+    box-sizing: border-box;
     height: 50px;
     width: 50px;
     padding: 0px;
+    border: 1px solid black;
 }
 
 .emptyHandTile {
@@ -80,12 +82,9 @@ h1 {
 }
 
 .emptyGridTile {
-    background-color: rgb(0, 170, 255);
+    background-color: rgb(0, 170, 255, 20%);
     opacity: 30%;
-    border: 0px;
 }
-
-
 
 .button img {
     height: 50px;
@@ -133,7 +132,7 @@ h1 {
     text-shadow: 3px 3px rgb(197, 173, 168);
 }
 
-.restart {
+#restart {
     font-size: x-large;
     color: white;
     background-color: rgb(1,166,248);
