@@ -40,4 +40,9 @@ public interface Qwirkle {
 
 	int getScore(int player);
 
+	int getTileSeriesNumbX(int index);
+
+	int getTileSeriesNumbY(int index);
+
+	int getTileSeriesSize();
 }

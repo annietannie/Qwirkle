@@ -18,4 +18,5 @@ interface Board {
 interface Tile {
     shape: "CIRCLE" | "SQUARE" | "DIAMOND" | "CLUB" | "FOURSTAR" | "EIGHTSTAR";
     colour: "RED" | "ORANGE" | "YELLOW" | "GREEN" | "BLUE" | "PURPLE";
+    thisTurn: boolean;
 }

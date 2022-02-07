@@ -104,4 +104,22 @@ public class QwirkleImpl implements Qwirkle {
     public int getScore(int player) {
         return players.get(player).getScore();
     }
+
+    @Override
+    public int getTileSeriesNumbX(int index) {
+        return (int) board.getTileSeries().get(index).get(1);
+    }
+
+    @Override
+    public int getTileSeriesNumbY(int index) {
+        return (int) board.getTileSeries().get(index).get(2);
+    }
+
+    @Override
+    public int getTileSeriesSize() {
+        if (board.getTileSeries() != null) {
+            return board.getTileSeries().size();
+        }
+        return 0;
+    }
 }

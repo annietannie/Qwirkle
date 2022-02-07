@@ -260,7 +260,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                         draggable="false"
                         onDragOver={allowDrop}
                         onClick={() => tradeTile()}
-                        onDrop={tradeTile}
+                        onDrop={dropHandlerTrade}
                     ></img>
                 </div>
                 <div id="undo" className="button">
