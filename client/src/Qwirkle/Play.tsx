@@ -157,6 +157,8 @@ export function Play({ gameState, setGameState}: PlayProps) {
         index: number) 
         {
         event.dataTransfer.setData("text", index.toString());
+        selectTile(index);
+        console.log(selectedTile);
     };
 
     // This makes the third box become droppable
@@ -164,11 +166,17 @@ export function Play({ gameState, setGameState}: PlayProps) {
         event.preventDefault();
     };
 
-    // This function will be triggered when dropping
-    function dropHandler (event: React.DragEvent<HTMLDivElement>) {
+    // This function will be triggered when dropping in the grid
+    function dropHandlerPlace (event: React.DragEvent<HTMLDivElement>, x: number, y: number) {
         event.preventDefault();
-        const data = event.dataTransfer.getData("text");
-        placeTile()
+        placeTile(y, x);
+    }
+
+    // This function will be triggered when dropping in the grid
+    function dropHandlerTrade (event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    console.log(event.target);
+    tradeTile();
     }
 
 
@@ -190,7 +198,7 @@ export function Play({ gameState, setGameState}: PlayProps) {
                                 <div 
                                     className="tile emptyTile emptyGridTile"
                                     onDragOver={allowDrop}
-                                    onDrop={dropHandler}
+                                    onDrop={() => dropHandlerPlace(event, j, i)}
                                     key={j}
                                     onClick={() => placeTile(i, j)}
                                 ></div>
@@ -250,7 +258,9 @@ export function Play({ gameState, setGameState}: PlayProps) {
                     <img 
                         src={trade}
                         draggable="false"
+                        onDragOver={allowDrop}
                         onClick={() => tradeTile()}
+                        onDrop={tradeTile}
                     ></img>
                 </div>
                 <div id="undo" className="button">

@@ -43,6 +43,10 @@ h1 {
 #tools{
     position: sticky;
     bottom: 0;
+    background-color: rgba(102, 204, 255, 0.5);
+    padding: 10px 0px 0px 0px;
+    margin: 0px 550px 0px 550px;
+    border-radius: 10px;
 }
 
 .hand-player {
